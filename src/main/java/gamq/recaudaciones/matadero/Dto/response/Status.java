@@ -1,0 +1,16 @@
+package gamq.recaudaciones.matadero.Dto.response;
+
+public enum Status {
+    OK,
+    BAD_REQUEST,
+    UNAUTHORIZED,
+    VALIDATION_EXCEPTION,
+    EXCEPTION,
+    WRONG_CREDENTIALS,
+    ACCESS_DENIED,
+    NOT_FOUND,
+    NOT_CONTENT,
+    DUPLICATE_ENTITY,
+    UNPROCESSABLE_ENTITY,
+    UNSUPPORTED_MEDIA_TYPE
+}

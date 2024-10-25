@@ -1,0 +1,51 @@
+package gamq.recaudaciones.matadero.Model;
+
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.experimental.Accessors;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
+
+import javax.persistence.*;
+import java.util.Date;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@EqualsAndHashCode(callSuper = false)
+@Accessors(chain = true)
+@Entity
+@Table(name = "orden", indexes = @Index(name = "idx_ord_uuid", columnList = "uuid", unique = true))
+@SQLDelete(sql = "UPDATE orden SET estado=true WHERE id_orden=?")
+@Where(clause = "estado = false")
+public class Orden {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_solictud")
+    private Long idSolictud;
+    @Column(name = "uuid", updatable = false, unique = true, nullable = false, length = 64)
+    private String uuid;
+    @Column(name = "fecha", nullable = false)
+    private Date fecha;
+    @Column(name = "tipo", nullable = false, length = 10)
+    private String tipo;
+    @Column(name = "cantidad", nullable = false)
+    private Double cantidad;
+    @Column(name = "total", nullable = false)
+    private Double Total;
+    @Column(name = "tasa", nullable = false)
+    private String tasa;
+    @Column(name = "estado_pago", nullable = false, length = 10)
+    private String estadoPago;
+
+
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_contribuyente", nullable = true)
+    private Contribuyente contribuyente;
+
+
+
+}
