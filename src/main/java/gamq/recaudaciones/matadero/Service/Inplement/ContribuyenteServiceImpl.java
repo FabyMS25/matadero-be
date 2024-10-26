@@ -11,6 +11,7 @@ import gamq.recaudaciones.matadero.exception.NoResultException;
 import gamq.recaudaciones.matadero.exception.NotFoundException;
 import gamq.recaudaciones.matadero.exception.NullReferenceException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Optional;
@@ -18,6 +19,7 @@ import java.util.stream.Collectors;
 
 import static gamq.recaudaciones.matadero.exception.enums.EntityType.*;
 
+@Component
 public class ContribuyenteServiceImpl implements ContribuyenteService {
 
     @Autowired
