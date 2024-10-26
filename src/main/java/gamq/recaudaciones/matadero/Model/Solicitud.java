@@ -39,6 +39,8 @@ public class Solicitud {
     private Double cantidad;
     @Column(name = "total", nullable = false, length = 10)
     private Double Total;
+    @Column(name = "estado", nullable = false)
+    private boolean estado;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_contribuyente", nullable = true)

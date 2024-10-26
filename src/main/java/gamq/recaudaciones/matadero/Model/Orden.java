@@ -39,7 +39,8 @@ public class Orden {
     private String tasa;
     @Column(name = "estado_pago", nullable = false, length = 10)
     private String estadoPago;
-
+    @Column(name = "estado", nullable = false)
+    private boolean estado;
 
 
     @ManyToOne(fetch = FetchType.LAZY)
