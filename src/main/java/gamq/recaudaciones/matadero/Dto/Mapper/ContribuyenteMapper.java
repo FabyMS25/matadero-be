@@ -16,6 +16,7 @@ public class ContribuyenteMapper {
         contribuyenteDto.setSexo(contribuyente.getSexo());
         contribuyenteDto.setFechaNac(contribuyente.getFechaNac());
         contribuyenteDto.setEstadoCivil(contribuyente.getEstadoCivil());
+        contribuyenteDto.setCodigoContribuyente(contribuyente.getCodigoContribuyente());
         contribuyenteDto.setDireccion(contribuyente.getDireccion());
         contribuyenteDto.setTipoDocumento(contribuyente.getTipoDocumento());
 
@@ -25,16 +26,17 @@ public class ContribuyenteMapper {
         Contribuyente contribuyente=new Contribuyente();
         contribuyente.setUuid(contribuyenteDto.getUuid());
         contribuyente.setNombre(contribuyenteDto.getNombre());
-        contribuyente.setApPaterno(contribuyente.getApPaterno());
+        contribuyente.setApPaterno(contribuyenteDto.getApPaterno());
         contribuyente.setApMaterno(contribuyenteDto.getApMaterno());
         contribuyente.setCiExpedido(contribuyenteDto.getCiExpedido());
-        contribuyente.setNroCarnet(contribuyente.getNroCarnet());
+        contribuyente.setNroCarnet(contribuyenteDto.getNroCarnet());
         contribuyente.setNroNit(contribuyenteDto.getNroNit());
         contribuyente.setSexo(contribuyenteDto.getSexo());
         contribuyente.setFechaNac(contribuyenteDto.getFechaNac());
         contribuyente.setEstadoCivil(contribuyenteDto.getEstadoCivil());
-        contribuyente.setDireccion(contribuyente.getDireccion());
-        contribuyente.setTipoDocumento(contribuyente.getTipoDocumento());
+        contribuyente.setCodigoContribuyente(contribuyenteDto.getCodigoContribuyente());
+        contribuyente.setDireccion(contribuyenteDto.getDireccion());
+        contribuyente.setTipoDocumento(contribuyenteDto.getTipoDocumento());
 
 
         return contribuyente;

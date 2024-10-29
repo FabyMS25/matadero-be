@@ -12,6 +12,7 @@ import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.UUID;
 
 @Getter
 @Setter
@@ -37,8 +38,10 @@ public class Solicitud {
     private String tipo;
     @Column(name = "cantidad", nullable = false, length = 10)
     private Double cantidad;
-    @Column(name = "total", nullable = false, length = 10)
-    private Double Total;
+    @Column(name = "tasa", nullable = false, length = 10)
+    private Double tasa;
+    @Column(name = "total", nullable = false)
+    private Double total;
     @Column(name = "estado", nullable = false)
     private boolean estado;
 
@@ -46,5 +49,8 @@ public class Solicitud {
     @JoinColumn(name = "id_contribuyente", nullable = true)
     private Contribuyente contribuyente;
 
-
+    @PrePersist
+    public void initializeUuid() {
+        this.setUuid(UUID.randomUUID().toString());
+    }
 }

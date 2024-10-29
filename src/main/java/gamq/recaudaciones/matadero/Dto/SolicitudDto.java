@@ -28,7 +28,9 @@ public class SolicitudDto {
 
     private Double cantidad;
 
-    private Double Total;
+    private Double tasa;
+
+    private Double total;
 
     private ContribuyenteDto contribuyenteDto;
 

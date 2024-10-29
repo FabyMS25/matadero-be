@@ -11,6 +11,8 @@ public class SolicitudMapper {
         solicitudDto.setFecha(solicitud.getFecha());
         solicitudDto.setTipo(solicitud.getTipo());
         solicitudDto.setCantidad(solicitud.getCantidad());
+        solicitudDto.setTasa(solicitud.getTasa());
+        solicitudDto.setTotal(solicitud.getTotal());
         solicitudDto.setEstado(solicitud.isEstado());
         solicitudDto.setContribuyenteDto(ContribuyenteMapper.toDto(solicitud.getContribuyente()));
 
@@ -23,9 +25,10 @@ public class SolicitudMapper {
         solicitud.setFecha(solicitudDto.getFecha());
         solicitud.setTipo(solicitudDto.getTipo());
         solicitud.setCantidad(solicitudDto.getCantidad());
+        solicitud.setTasa(solicitudDto.getTasa());
+        solicitud.setTotal(solicitudDto.getTotal());
         solicitud.setEstado(solicitudDto.isEstado());
 
-        return solicitud
-;
+        return solicitud;
     }
 }

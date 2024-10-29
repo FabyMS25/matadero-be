@@ -29,7 +29,7 @@ public class OrdenDto {
 
     private Double cantidad;
 
-    private Double Total;
+    private Double total;
 
     private String tasa;
 
