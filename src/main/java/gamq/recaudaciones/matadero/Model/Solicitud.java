@@ -34,9 +34,7 @@ public class Solicitud {
     private String uuid;
     @Column(name = "fecha", nullable = false)
     private Date fecha;
-    @Column(name = "tipo", nullable = false, length = 10)
-    private String tipo;
-    @Column(name = "cantidad", nullable = false, length = 10)
+    @Column(name = "cantidad", nullable = false)
     private Double cantidad;
     @Column(name = "tasa", nullable = false, length = 10)
     private Double tasa;
@@ -48,6 +46,10 @@ public class Solicitud {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_contribuyente", nullable = true)
     private Contribuyente contribuyente;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_categotria", nullable = true)
+    private Categoria categoria;
 
     @PrePersist
     public void initializeUuid() {

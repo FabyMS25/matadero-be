@@ -4,6 +4,6 @@ public enum EntityType {
 
     CONTRIBUYENTE,
     SOLICTUD,
-    ORDEN
-
+    ORDEN,
+    CATEGORIA
 }

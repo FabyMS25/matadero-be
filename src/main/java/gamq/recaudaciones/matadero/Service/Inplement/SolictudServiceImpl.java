@@ -2,8 +2,10 @@ package gamq.recaudaciones.matadero.Service.Inplement;
 
 import gamq.recaudaciones.matadero.Dto.Mapper.SolicitudMapper;
 import gamq.recaudaciones.matadero.Dto.SolicitudDto;
+import gamq.recaudaciones.matadero.Model.Categoria;
 import gamq.recaudaciones.matadero.Model.Contribuyente;
 import gamq.recaudaciones.matadero.Model.Solicitud;
+import gamq.recaudaciones.matadero.Repository.CategoriaRepository;
 import gamq.recaudaciones.matadero.Repository.ContribuyenteRepository;
 import gamq.recaudaciones.matadero.Repository.SolicitudRepository;
 import gamq.recaudaciones.matadero.Service.SolicitudService;
@@ -18,8 +20,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import static gamq.recaudaciones.matadero.exception.enums.EntityType.CONTRIBUYENTE;
-import static gamq.recaudaciones.matadero.exception.enums.EntityType.SOLICTUD;
+import static gamq.recaudaciones.matadero.exception.enums.EntityType.*;
 
 @Component
 public class SolictudServiceImpl implements SolicitudService {
@@ -28,6 +29,8 @@ public class SolictudServiceImpl implements SolicitudService {
     SolicitudRepository solicitudRepository;
     @Autowired
     ContribuyenteRepository contribuyenteRepository;
+    @Autowired
+    CategoriaRepository categoriaRepository;
 
     public SolicitudDto findByUuid(String uuid){
         Optional<Solicitud> SolicitudOptional = solicitudRepository.findByUuid(uuid);
@@ -54,7 +57,9 @@ public class SolictudServiceImpl implements SolicitudService {
 
             Solicitud newSolicitud = SolicitudMapper.toEntity(solicitudDto);
             Contribuyente contri=getContri(solicitudDto.getContribuyenteDto().getUuid());
+            Categoria cate= getCategoria(solicitudDto.getCategoriaDto().getUuid());
             newSolicitud.setContribuyente(contri);
+            newSolicitud.setCategoria(cate);
 
             return SolicitudMapper.toDto(solicitudRepository.save(newSolicitud));
         } else {
@@ -72,7 +77,9 @@ public class SolictudServiceImpl implements SolicitudService {
                 Solicitud solModificado = SolicitudMapper.toEntity(solicitudDto);
                 solModificado.setIdSolictud(SolicitudOptional.get().getIdSolictud());
                 Contribuyente contri=getContri(solicitudDto.getContribuyenteDto().getUuid());
+                Categoria cate= getCategoria(solicitudDto.getCategoriaDto().getUuid());
                 solModificado.setContribuyente(contri);
+                solModificado.setCategoria(cate);
 
                 return SolicitudMapper.toDto(solicitudRepository.save(solModificado));
             } else {
@@ -87,7 +94,10 @@ public class SolictudServiceImpl implements SolicitudService {
         return contribuyenteRepository.findByUuid(uuid)
                 .orElseThrow(() -> new NotFoundException(CONTRIBUYENTE, uuid));
     }
-
+    private Categoria getCategoria(String uuid) {
+        return categoriaRepository.findByUuid(uuid)
+                .orElseThrow(() -> new NotFoundException(CATEGORIA, uuid));
+    }
 
 
 

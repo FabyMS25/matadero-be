@@ -9,13 +9,13 @@ public class OrdenMapper {
         OrdenDto ordenDto=new OrdenDto();
         ordenDto.setUuid(orden.getUuid());
         ordenDto.setFecha(orden.getFecha());
-        ordenDto.setTipo(orden.getTipo());
         ordenDto.setCantidad(orden.getCantidad());
         ordenDto.setTasa(orden.getTasa());
         ordenDto.setTotal(orden.getTotal());
         ordenDto.setEstadoPago(orden.getEstadoPago());
         ordenDto.setEstado(ordenDto.isEstado());
         ordenDto.setContribuyenteDto(ContribuyenteMapper.toDto(orden.getContribuyente()));
+        ordenDto.setCategoriaDto(CategoriaMapper.toDto(orden.getCategoria()));
 
         return ordenDto;
     }
@@ -23,7 +23,6 @@ public class OrdenMapper {
         Orden orden= new Orden();
         orden.setUuid(ordenDto.getUuid());
         orden.setFecha(ordenDto.getFecha());
-        orden.setTipo(ordenDto.getTipo());
         orden.setCantidad(ordenDto.getCantidad());
         orden.setTasa(ordenDto.getTasa());
         orden.setTotal(ordenDto.getTotal());

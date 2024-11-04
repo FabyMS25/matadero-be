@@ -1,5 +1,6 @@
 package gamq.recaudaciones.matadero.Dto;
 
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;
@@ -9,7 +10,6 @@ import lombok.ToString;
 import lombok.experimental.Accessors;
 
 import javax.persistence.Column;
-import java.util.Date;
 
 @Getter
 @Setter
@@ -18,22 +18,12 @@ import java.util.Date;
 @ToString
 @JsonInclude(value = JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class SolicitudDto {
+public class CategoriaDto {
 
     private String uuid;
 
-    private Date fecha;
+    private String tipo;
 
-    private Double cantidad;
-
-    private Double tasa;
-
-    private Double total;
-
-    private ContribuyenteDto contribuyenteDto;
-
-    private CategoriaDto categoriaDto;
-
-    private boolean estado;
+    private Double precio;
 
 }

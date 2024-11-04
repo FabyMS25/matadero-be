@@ -8,6 +8,7 @@ import gamq.recaudaciones.matadero.Dto.OrdenDto;
 import gamq.recaudaciones.matadero.Model.*;
 import gamq.recaudaciones.matadero.Model.Orden;
 import gamq.recaudaciones.matadero.Model.Orden;
+import gamq.recaudaciones.matadero.Repository.CategoriaRepository;
 import gamq.recaudaciones.matadero.Repository.ContribuyenteRepository;
 import gamq.recaudaciones.matadero.Repository.OrdenRepository;
 import gamq.recaudaciones.matadero.Service.OrdenService;
@@ -30,6 +31,8 @@ public class OrdenServiceImpl implements OrdenService {
     OrdenRepository ordenRepository;
    @Autowired
     ContribuyenteRepository contribuyenteRepository;
+   @Autowired
+    CategoriaRepository categoriaRepository;
     
    public  OrdenDto findByUuid(String uuid){
         Optional<Orden> OrdenOptional = ordenRepository.findByUuid(uuid);
@@ -74,7 +77,9 @@ public class OrdenServiceImpl implements OrdenService {
                 Orden ordenModificado = OrdenMapper.toEntity(ordenDto);
                 ordenModificado.setIdSolictud(OrdenOptional.get().getIdSolictud());
                 Contribuyente contri=getContri(ordenDto.getContribuyenteDto().getUuid());
+                Categoria cate= getCategoria(ordenDto.getCategoriaDto().getUuid());
                 ordenModificado.setContribuyente(contri);
+                ordenModificado.setCategoria(cate);
 
                 return OrdenMapper.toDto(ordenRepository.save(ordenModificado));
             } else {
@@ -90,5 +95,11 @@ public class OrdenServiceImpl implements OrdenService {
         return contribuyenteRepository.findByUuid(uuid)
                 .orElseThrow(() -> new NotFoundException(CONTRIBUYENTE, uuid));
     }
-   
+
+    private Categoria getCategoria(String uuid) {
+        return categoriaRepository.findByUuid(uuid)
+                .orElseThrow(() -> new NotFoundException(CATEGORIA, uuid));
+    }
+
+
 }

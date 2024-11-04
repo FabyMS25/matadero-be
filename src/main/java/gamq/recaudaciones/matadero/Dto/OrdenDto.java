@@ -37,6 +37,8 @@ public class OrdenDto {
 
     private ContribuyenteDto contribuyenteDto;
 
+    private CategoriaDto categoriaDto;
+
     private boolean estado;
 
 }
