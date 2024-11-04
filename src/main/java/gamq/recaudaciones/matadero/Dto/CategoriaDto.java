@@ -26,4 +26,6 @@ public class CategoriaDto {
 
     private Double precio;
 
+    private boolean estado;
+
 }

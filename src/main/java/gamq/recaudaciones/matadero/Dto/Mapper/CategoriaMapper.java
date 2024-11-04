@@ -9,7 +9,8 @@ public class CategoriaMapper {
         CategoriaDto categoriaDto= new CategoriaDto();
         categoriaDto.setUuid(categoria.getUuid());
         categoriaDto.setTipo(categoria.getTipo());
-        categoriaDto.setPrecio(categoriaDto.getPrecio());
+        categoriaDto.setPrecio(categoria.getPrecio());
+        categoriaDto.setEstado(categoria.isEstado());
 
 
         return categoriaDto;
@@ -19,9 +20,9 @@ public class CategoriaMapper {
     public static Categoria toEntity(CategoriaDto categoriaDto){
         Categoria categoria=new Categoria();
         categoria.setUuid(categoriaDto.getUuid());
-        categoria.setTipo(categoria.getTipo());
+        categoria.setTipo(categoriaDto.getTipo());
         categoria.setPrecio(categoriaDto.getPrecio());
-
+        categoria.setEstado(categoriaDto.isEstado());
 
         return categoria;
     }

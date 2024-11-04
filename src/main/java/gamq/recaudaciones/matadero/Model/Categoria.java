@@ -33,4 +33,7 @@ public class Categoria {
     private String tipo;
     @Column(name = "precio", nullable = false)
     private Double precio;
+    @Column(name = "estado", nullable = false)
+    private boolean estado;
+
 }
