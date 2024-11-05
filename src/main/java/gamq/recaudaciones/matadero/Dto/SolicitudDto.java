@@ -34,6 +34,8 @@ public class SolicitudDto {
 
     private CategoriaDto categoriaDto;
 
+    private String estadoSolicitud;
+
     private boolean estado;
 
 }

@@ -65,7 +65,7 @@ public class ReportesController {
             System.out.println(e.getLocalizedMessage());
         }
     }
-    @RequestMapping(value="/solicitud",method= RequestMethod.GET)
+    @RequestMapping(value="/solicitudes",method= RequestMethod.GET)
     @ResponseBody
     public void reporteListaSolictudes (
             @RequestParam(name = "fecha_ini",required = false) @DateTimeFormat(pattern="dd/MM/yyyy") Date fecha_ini,
@@ -96,6 +96,79 @@ public class ReportesController {
                 generadorReporte.generarSqlReportePdf(
                         "solis",
                         "classpath:reportes/solis.jrxml",
+                        parametros,
+                        response
+                );
+            } catch (SQLException ex) {
+                response.setStatus(500);
+                throw new RuntimeException(ex);
+
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println(e.getLocalizedMessage());
+        }
+    }
+    @RequestMapping(value="/orden",method= RequestMethod.GET)
+    @ResponseBody
+    public void reporteorden (
+            @RequestParam(name = "uuid",required = false) String uuid,
+            @RequestParam(name = "user",required = false) String user,
+            @RequestHeader Map<String, String> headers,
+            HttpServletResponse response
+    ) {
+        try {
+            //usuario
+            //String usuario = headers.getOrDefault("usuario", "Default");
+            //ingreso almacen
+            HashMap<String, Object> parametros = new HashMap<String,Object>();
+
+            parametros.put("uuid",uuid);
+            parametros.put("user",user);
+            //parametros.put("logo64","iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk");
+
+            parametros.put(JRParameter.REPORT_LOCALE, Locale.ENGLISH);
+            try {
+                generadorReporte.generarSqlReportePdf(
+                        "orden",
+                        "classpath:reportes/orden.jrxml",
+                        parametros,
+                        response
+                );
+            } catch (SQLException ex) {
+                response.setStatus(500);
+                throw new RuntimeException(ex);
+
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println(e.getLocalizedMessage());
+        }
+    }
+    @RequestMapping(value="/solicitud",method= RequestMethod.GET)
+    @ResponseBody
+    public void reporteSolictud (
+            @RequestParam(name = "uuid",required = false) String uuid,
+            @RequestParam(name = "user",required = false) String user,
+            @RequestHeader Map<String, String> headers,
+            HttpServletResponse response
+    ) {
+        try {
+            //usuario
+            //String usuario = headers.getOrDefault("usuario", "Default");
+            //ingreso almacen
+            HashMap<String, Object> parametros = new HashMap<String,Object>();
+
+            parametros.put("uuid",uuid);
+            parametros.put("user",user);
+
+            //parametros.put("logo64","iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk");
+
+            parametros.put(JRParameter.REPORT_LOCALE, Locale.ENGLISH);
+            try {
+                generadorReporte.generarSqlReportePdf(
+                        "solictud",
+                        "classpath:reportes/solictud.jrxml",
                         parametros,
                         response
                 );
