@@ -8,10 +8,10 @@
 	<parameter name="fecha_fin" class="java.sql.Date"/>
 	<queryString language="SQL">
 		<![CDATA[Select ap_paterno,ap_materno, nombre, fecha, 
-	   	cantidad, cat.tipo, tasa, cantidad, total, estado_pago, precio
-		From orden ord
-		join contribuyente co on co.id_contribuyente = ord.id_contribuyente
-		join categoria cat on cat.id_categoria = ord.id_categoria
+	   	cantidad, cat.tipo, cantidad, total,sol.precio
+		From solicitud sol
+		join contribuyente co on co.id_contribuyente = sol.id_contribuyente
+		join categoria cat on cat.id_categoria = sol.id_categoria
 		where fecha between $P{fecha_ini} and $P{fecha_fin}]]>
 	</queryString>
 	<field name="nombre" class="java.lang.String"/>
@@ -19,10 +19,8 @@
 	<field name="ap_paterno" class="java.lang.String"/>
 	<field name="ap_materno" class="java.lang.String"/>
 	<field name="cantidad" class="java.lang.Integer"/>
-	<field name="tasa" class="java.lang.String"/>
 	<field name="total" class="java.math.BigDecimal"/>
 	<field name="precio" class="java.math.BigDecimal"/>
-	<field name="estado_pago" class="java.lang.String"/>
 	<field name="tipo" class="java.lang.String"/>
 	<variable name="total1" class="java.math.BigDecimal" calculation="Sum">
 		<variableExpression><![CDATA[$F{total}]]></variableExpression>

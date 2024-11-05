@@ -8,7 +8,7 @@
 	<parameter name="fecha_fin" class="java.sql.Date"/>
 	<queryString language="SQL">
 		<![CDATA[Select ap_paterno,ap_materno, nombre, fecha, 
-	   	cantidad, cat.tipo, tasa, cantidad, total, estado_pago, precio
+	   	cantidad, cat.tipo, tasa, cantidad, total, estado_pago, ord.precio
 		From orden ord
 		join contribuyente co on co.id_contribuyente = ord.id_contribuyente
 		join categoria cat on cat.id_categoria = ord.id_categoria
@@ -186,7 +186,7 @@
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="24" splitType="Stretch">
+		<band height="33" splitType="Stretch">
 			<textField pattern="dd/MM/yy">
 				<reportElement x="10" y="0" width="70" height="20" uuid="d88c3c65-ad6b-4f1b-a072-61c3072a9c52">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="95b31b94-3106-434b-811b-6d3245a7e242"/>
@@ -242,7 +242,7 @@
 	<columnFooter>
 		<band height="4" splitType="Stretch">
 			<line>
-				<reportElement x="-15" y="0" width="585" height="1" uuid="22b00a2e-03f9-4578-bf8c-b4c55eb00692"/>
+				<reportElement x="-15" y="-11" width="585" height="1" uuid="22b00a2e-03f9-4578-bf8c-b4c55eb00692"/>
 			</line>
 		</band>
 	</columnFooter>
