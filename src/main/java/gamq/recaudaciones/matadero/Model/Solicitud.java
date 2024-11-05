@@ -40,7 +40,7 @@ public class Solicitud {
     private Double precio;
     @Column(name = "total", nullable = false)
     private Double total;
-    @Column(name = "estado_solicitud", updatable = false, unique = true, nullable = false, length = 64)
+    @Column(name = "estado_solicitud", nullable = false, length = 30)
     private String estadoSolicitud;
     @Column(name = "estado", nullable = false)
     private boolean estado;
