@@ -78,8 +78,8 @@ public class ReportesController {
             parametros.put(JRParameter.REPORT_LOCALE, Locale.ENGLISH);
             try {
                 generadorReporte.generarSqlReportePdf(
-                        "ordenes",
-                        "classpath:reportes/ordenes.jrxml",
+                        "solis",
+                        "classpath:reportes/solis.jrxml",
                         parametros,
                         response
                 );

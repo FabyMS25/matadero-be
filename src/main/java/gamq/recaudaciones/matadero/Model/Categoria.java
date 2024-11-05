@@ -11,6 +11,7 @@ import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.UUID;
 
 @Getter
 @Setter
@@ -36,4 +37,8 @@ public class Categoria {
     @Column(name = "estado", nullable = false)
     private boolean estado;
 
+    @PrePersist
+    public void initializeUuid() {
+        this.setUuid(UUID.randomUUID().toString());
+    }
 }
