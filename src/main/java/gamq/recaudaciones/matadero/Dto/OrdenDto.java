@@ -29,6 +29,8 @@ public class OrdenDto {
 
     private Double cantidad;
 
+    private Double precio;
+
     private Double total;
 
     private String tasa;

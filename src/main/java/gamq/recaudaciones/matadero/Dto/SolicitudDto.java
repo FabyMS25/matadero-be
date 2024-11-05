@@ -26,7 +26,7 @@ public class SolicitudDto {
 
     private Double cantidad;
 
-    private Double tasa;
+    private Double precio;
 
     private Double total;
 

@@ -32,6 +32,8 @@ public class Orden {
     private Date fecha;
     @Column(name = "cantidad", nullable = false)
     private Double cantidad;
+    @Column(name = "precio", nullable = false)
+    private Double precio;
     @Column(name = "total", nullable = false)
     private Double Total;
     @Column(name = "tasa", nullable = false)

@@ -36,8 +36,8 @@ public class Solicitud {
     private Date fecha;
     @Column(name = "cantidad", nullable = false)
     private Double cantidad;
-    @Column(name = "tasa", nullable = false, length = 10)
-    private Double tasa;
+    @Column(name = "precio", nullable = false, length = 10)
+    private Double precio;
     @Column(name = "total", nullable = false)
     private Double total;
     @Column(name = "estado", nullable = false)
