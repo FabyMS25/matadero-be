@@ -58,7 +58,9 @@ public class OrdenServiceImpl implements OrdenService {
 
             Orden newOrden = OrdenMapper.toEntity(ordenDto);
             Contribuyente contri=getContri(ordenDto.getContribuyenteDto().getUuid());
+            Categoria cate= getCategoria(ordenDto.getCategoriaDto().getUuid());
             newOrden.setContribuyente(contri);
+            newOrden.setCategoria(cate);
 
             return OrdenMapper.toDto(ordenRepository.save(newOrden));
         } else {

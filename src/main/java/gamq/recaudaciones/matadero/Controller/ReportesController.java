@@ -26,6 +26,7 @@ public class ReportesController {
     public void reporteListaReserva (
             @RequestParam(name = "fecha_ini",required = false) @DateTimeFormat(pattern="dd/MM/yyyy") Date fecha_ini,
             @RequestParam(name = "fecha_fin",required = false) @DateTimeFormat(pattern="dd/MM/yyyy") Date fecha_fin,
+            @RequestParam(name = "tipo",required = false) String tipo,
             @RequestHeader Map<String, String> headers,
             HttpServletResponse response
     ) {
@@ -34,9 +35,16 @@ public class ReportesController {
             //String usuario = headers.getOrDefault("usuario", "Default");
             //ingreso almacen
             HashMap<String, Object> parametros = new HashMap<String,Object>();
+
             parametros.put("fecha_ini",fecha_ini);
             parametros.put("fecha_fin",fecha_fin);
-
+            if(tipo.equals("TODOS")) {
+                String cad = "%%";
+                parametros.put("tipo", cad);
+            }
+            else {
+                parametros.put("tipo",tipo);
+            }
             //parametros.put("logo64","iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk");
 
             parametros.put(JRParameter.REPORT_LOCALE, Locale.ENGLISH);
@@ -62,6 +70,7 @@ public class ReportesController {
     public void reporteListaSolictudes (
             @RequestParam(name = "fecha_ini",required = false) @DateTimeFormat(pattern="dd/MM/yyyy") Date fecha_ini,
             @RequestParam(name = "fecha_fin",required = false) @DateTimeFormat(pattern="dd/MM/yyyy") Date fecha_fin,
+            @RequestParam(name = "tipo",required = false) String tipo,
             @RequestHeader Map<String, String> headers,
             HttpServletResponse response
     ) {
@@ -72,6 +81,13 @@ public class ReportesController {
             HashMap<String, Object> parametros = new HashMap<String,Object>();
             parametros.put("fecha_ini",fecha_ini);
             parametros.put("fecha_fin",fecha_fin);
+            if(tipo.equals("TODOS")) {
+                String cad = "%%";
+                parametros.put("tipo", cad);
+            }
+            else {
+                parametros.put("tipo",tipo);
+            }
 
             //parametros.put("logo64","iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk");
 

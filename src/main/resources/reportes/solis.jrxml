@@ -6,13 +6,15 @@
 	<parameter name="logo64" class="java.lang.String"/>
 	<parameter name="fecha_ini" class="java.sql.Date"/>
 	<parameter name="fecha_fin" class="java.sql.Date"/>
+	<parameter name="tipo" class="java.lang.String"/>
 	<queryString language="SQL">
 		<![CDATA[Select ap_paterno,ap_materno, nombre, fecha, 
 	   	cantidad, cat.tipo, cantidad, total,sol.precio
 		From solicitud sol
 		join contribuyente co on co.id_contribuyente = sol.id_contribuyente
 		join categoria cat on cat.id_categoria = sol.id_categoria
-		where fecha between $P{fecha_ini} and $P{fecha_fin}]]>
+		where fecha between $P{fecha_ini} and $P{fecha_fin}
+		and cat.tipo like $P{tipo}]]>
 	</queryString>
 	<field name="nombre" class="java.lang.String"/>
 	<field name="fecha" class="java.sql.Date"/>
