@@ -48,7 +48,7 @@ public class Solicitud {
     private Contribuyente contribuyente;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_categotria", nullable = true)
+    @JoinColumn(name = "id_categoria", nullable = true)
     private Categoria categoria;
 
     @PrePersist
