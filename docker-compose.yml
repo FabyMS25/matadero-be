@@ -1,52 +1,52 @@
 version: '3.8'
 services:
-  be-deportes:
+  be-matadero:
     depends_on:
-      - db-deportes
-    image: 'deportes-be'
-    container_name: 'deportes-be'
+      - db-matadero
+    image: 'matadero-be'
+    container_name: 'matadero-be'
     build: .
     ports:
-      - '8085:8085'
+      - '8086:8086'
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://db-deportes:5432/db_deportes
-      - SPRING_DATASOURCE_USERNAME=deportes
-      - SPRING_DATASOURCE_PASSWORD=deportes123
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db-matadero:5432/db_matadero
+      - SPRING_DATASOURCE_USERNAME=matadero
+      - SPRING_DATASOURCE_PASSWORD=matadero123
       - SPRING_JPA_HIBERNATE_DDL_AUTO=update
     restart: always
-  db-deportes:
+  db-matadero:
     image: postgis/postgis:14-3.2-alpine
 #    image: postgres:14-alpine
-    container_name: 'deportes-db'
+    container_name: 'matadero-db'
     environment:
-      - POSTGRES_USER=deportes
-      - POSTGRES_PASSWORD=deportes123
-      - POSTGRES_DB=db_deportes
+      - POSTGRES_USER=matadero
+      - POSTGRES_PASSWORD=matadero123
+      - POSTGRES_DB=db_matadero
     ports:
       - '5438:5432'
     volumes:
       - db:/var/lib/postgresql/data
     restart: always
-  pg-deportes:
+  pg-matadero:
     image: dpage/pgadmin4
-    container_name: 'deportes-pg'
+    container_name: 'matadero-pg'
     ports:
-      - "5055:80"
+      - "5056:80"
     environment:
-      - PGADMIN_DEFAULT_EMAIL=deportes@admin.com
-      - PGADMIN_DEFAULT_PASSWORD=deportes123
+      - PGADMIN_DEFAULT_EMAIL=matadero@admin.com
+      - PGADMIN_DEFAULT_PASSWORD=matadero123
     depends_on:
-      - db-deportes
+      - db-matadero
     volumes:
       - pg:/var/lib/pgadmin
     restart: always
-  fe-deportes:
-    image: 'deportes-fe'
-    container_name: 'deportes-fe'
+  fe-matadero:
+    image: 'matadero-fe'
+    container_name: 'matadero-fe'
     ports:
-      - '4205:80'
+      - '4206:80'
     depends_on:
-      - be-deportes
+      - be-matadero
     restart: always
 volumes:
   db:
