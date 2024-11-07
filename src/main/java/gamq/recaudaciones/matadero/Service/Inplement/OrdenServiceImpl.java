@@ -115,7 +115,7 @@ public class OrdenServiceImpl implements OrdenService {
             throw new NotFoundException(ORDEN, uuid);
         }
     }
-    public String softDelete(String uuid, String motivo) {
+    public String anularData(String uuid, String motivo) {
         Optional<Orden> found = ordenRepository.findByUuid(uuid);
         if (found.isPresent()) {
             Orden orden = found.get();

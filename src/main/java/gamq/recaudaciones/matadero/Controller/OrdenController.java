@@ -59,11 +59,11 @@ public class OrdenController {
                            @PathVariable("uuid") String uuid) {
         return Response.ok().setPayload(OrdenService.delete(uuid));
     }
-    @PutMapping("/soft-delete")
-    public Response softDelete(
+    @PutMapping("/anular")
+    public Response anularData(
             @RequestParam(name = "uuid", required = true) String uuid,
             @RequestParam(name = "motivo", required = false) String motivo
     ) {
-        return Response.ok().setPayload(OrdenService.softDelete(uuid, motivo));
+        return Response.ok().setPayload(OrdenService.anularData(uuid, motivo));
     }
 }

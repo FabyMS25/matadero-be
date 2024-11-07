@@ -13,5 +13,5 @@ public interface OrdenService {
     OrdenDto crearOrden(OrdenDto ordenDto);
     OrdenDto actualizarOrden(OrdenDto ordenDto);
     String delete(String uuid);
-    String softDelete(String uuid, String motivo);
+    String anularData(String uuid, String motivo);
 }
