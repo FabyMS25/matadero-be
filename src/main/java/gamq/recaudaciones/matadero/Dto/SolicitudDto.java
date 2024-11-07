@@ -36,6 +36,8 @@ public class SolicitudDto {
 
     private String estadoSolicitud;
 
+    private String motivo;
+
     private boolean estado;
 
 }

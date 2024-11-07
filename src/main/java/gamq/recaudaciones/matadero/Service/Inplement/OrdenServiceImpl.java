@@ -19,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -103,5 +104,19 @@ public class OrdenServiceImpl implements OrdenService {
                 .orElseThrow(() -> new NotFoundException(CATEGORIA, uuid));
     }
 
+    @Transactional
+    @Override
+    public String delete(String uuid, String motivo) {
+        Optional<Orden> found = ordenRepository.findByUuid(uuid);
+        if (found.isPresent()) {
+            Orden orden = found.get();
+            orden.setMotivo(motivo);
+            ordenRepository.save(orden);
+            ordenRepository.delete(orden);
 
+            return "Eliminación exitosa";
+        } else {
+            throw new NotFoundException(ORDEN, uuid);
+        }
+    }
 }

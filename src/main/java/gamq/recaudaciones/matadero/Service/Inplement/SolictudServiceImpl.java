@@ -16,6 +16,7 @@ import gamq.recaudaciones.matadero.exception.enums.EntityType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -99,6 +100,33 @@ public class SolictudServiceImpl implements SolicitudService {
                 .orElseThrow(() -> new NotFoundException(CATEGORIA, uuid));
     }
 
+    @Transactional
+    @Override
+    public String delete(String uuid) {
+        Optional<Solicitud> found = solicitudRepository.findByUuid(uuid);
+        if (found.isPresent()) {
+            Solicitud solicitud = found.get();
+            solicitudRepository.delete(solicitud);
+
+            return "Eliminación exitosa";
+        } else {
+            throw new NotFoundException(SOLICTUD, uuid);
+        }
+    }
+    @Transactional
+    public String softDelete(String uuid, String motivo) {
+        Optional<Solicitud> found = solicitudRepository.findByUuid(uuid);
+        if (found.isPresent()) {
+            Solicitud solicitud = found.get();
+            solicitud.setEstado(true);
+            solicitud.setMotivo(motivo);
+            solicitudRepository.save(solicitud);
+
+            return "Eliminación exitosa";
+        } else {
+            throw new NotFoundException(SOLICTUD, uuid);
+        }
+    }
 
 
 }

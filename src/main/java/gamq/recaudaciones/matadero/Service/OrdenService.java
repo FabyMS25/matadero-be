@@ -12,4 +12,5 @@ public interface OrdenService {
     List<OrdenDto> obtenerOrdenes();
     OrdenDto crearOrden(OrdenDto ordenDto);
     OrdenDto actualizarOrden(OrdenDto ordenDto);
+    String delete(String uuid, String motivo);
 }

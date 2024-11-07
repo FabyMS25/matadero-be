@@ -13,6 +13,7 @@ import gamq.recaudaciones.matadero.exception.NullReferenceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -73,7 +74,20 @@ public class ContribuyenteServiceImpl implements ContribuyenteService {
         } else {
             throw new NullReferenceException(SOLICTUD);
         }
+    }
 
+    @Transactional
+    @Override
+    public String delete(String uuid) {
+        Optional<Contribuyente> found = contribuyenteRepository.findByUuid(uuid);
+        if (found.isPresent()) {
+            Contribuyente contribuyente = found.get();
+            contribuyenteRepository.delete(contribuyente);
+
+            return "Eliminacion exitosa";
+        } else {
+            throw new NotFoundException(CONTRIBUYENTE, uuid);
+        }
     }
 
 }

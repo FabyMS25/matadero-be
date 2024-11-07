@@ -19,29 +19,37 @@ public class ContribuyenteDto {
 
     private String uuid;
 
-    private String nombre;
+    private String fullName;
 
-    private String apPaterno;
-
-    private String apMaterno;
-
-    private String nroCarnet;
-
-    private String nroNit;
-
-    private String ciExpedido;
-
-    private String sexo;
-
-    private String direccion;
+    private String tipoContribuyente;
 
     private String codigoContribuyente;
 
     private String tipoDocumento;
 
+    private String numeroDocumento;
+
+    private String expedido;
+
+    private String nombre;
+
+    private String primerApellido;
+
+    private String segundoApellido;
+
+    private String genero;
+
+    private String fechaNacimiento;
+
     private String estadoCivil;
 
-    private String fechaNac;
+    private String nroNit;
+
+    private String celular;
+
+    private String correo;
+
+    private String direccion;
 
     private boolean estado;
 }

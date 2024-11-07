@@ -53,4 +53,12 @@ public class OrdenController {
             return  Response.unprocessableEntity().setPayload(ex.getMessage());
         }
     }
+
+    @DeleteMapping("/{uuid}")
+    public Response delete(
+            @Parameter(description = "Uuid para eliminar Orden") @PathVariable("uuid") String uuid,
+            @RequestParam(value = "motivo", required = false) String motivo) {
+
+        return Response.ok().setPayload(OrdenService.delete(uuid, motivo));
+    }
 }
