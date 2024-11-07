@@ -12,4 +12,5 @@ public interface CategoriaService {
     List<CategoriaDto> obtenerCategorias();
     CategoriaDto crearCategoria(CategoriaDto CategoriaDto);
     CategoriaDto actualizarCategoria(CategoriaDto CategoriaDto);
+    String delete(String uuid);
 }

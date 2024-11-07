@@ -89,7 +89,6 @@ public class SolictudServiceImpl implements SolicitudService {
         } else {
             throw new NullReferenceException(SOLICTUD);
         }
-
     }
     private Contribuyente getContri(String uuid) {
         return contribuyenteRepository.findByUuid(uuid)
@@ -100,33 +99,29 @@ public class SolictudServiceImpl implements SolicitudService {
                 .orElseThrow(() -> new NotFoundException(CATEGORIA, uuid));
     }
 
-    @Transactional
-    @Override
     public String delete(String uuid) {
         Optional<Solicitud> found = solicitudRepository.findByUuid(uuid);
         if (found.isPresent()) {
             Solicitud solicitud = found.get();
             solicitudRepository.delete(solicitud);
-
             return "Eliminación exitosa";
         } else {
             throw new NotFoundException(SOLICTUD, uuid);
         }
     }
-    @Transactional
+
     public String softDelete(String uuid, String motivo) {
         Optional<Solicitud> found = solicitudRepository.findByUuid(uuid);
         if (found.isPresent()) {
             Solicitud solicitud = found.get();
-            solicitud.setEstado(true);
             solicitud.setMotivo(motivo);
-            solicitudRepository.save(solicitud);
+            solicitud.setEstado(true);
 
+            solicitudRepository.save(solicitud);
             return "Eliminación exitosa";
         } else {
             throw new NotFoundException(SOLICTUD, uuid);
         }
     }
-
 
 }

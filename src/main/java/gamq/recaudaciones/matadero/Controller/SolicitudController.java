@@ -60,19 +60,15 @@ public class SolicitudController {
     }
     @PutMapping("/soft-delete")
     public Response softDelete(
-            @RequestParam(name = "uuid", required = true) String uuid,
-            @RequestParam(name = "motivo", required = false) String motivo
+            @RequestParam String uuid,
+            @RequestParam String motivo
     ) {
-        return Response.ok().setPayload(SolicitudService.softDelete(uuid, motivo));
+        try {
+            return Response.ok().setPayload(SolicitudService.softDelete(uuid, motivo));
+        } catch (Exception ex) {
+            return Response.unprocessableEntity().setPayload(ex.getMessage());
+        }
     }
-//    @PutMapping("/soft-delete")
-//    public Response softDelete( @RequestBody SolicitudDto SolicitudDto) {
-//        try{
-//            return Response.ok().setPayload(SolicitudService.actualizarSolicitud(SolicitudDto));
-//        } catch (Exception ex) {
-//            return  Response.unprocessableEntity().setPayload(ex.getMessage());
-//        }
-//    }
 
 
 }

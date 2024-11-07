@@ -7,7 +7,7 @@
 	<parameter name="uuid" class="java.lang.String"/>
 	<parameter name="user" class="java.lang.String"/>
 	<queryString language="SQL">
-		<![CDATA[select fecha, cantidad, sol.precio, total, sol.uuid, ap_paterno, ap_materno, nombre, nro_carnet, ci_expedido,
+		<![CDATA[select fecha, cantidad, sol.precio, total, sol.uuid, primer_apellido, segundo_apellido, nombre, numero_documento, expedido,
 	   	tipo, cat.precio  	
 		from Solicitud sol
 		join contribuyente con on con.id_contribuyente = sol.id_contribuyente
@@ -18,11 +18,11 @@
 	<field name="cantidad" class="java.lang.Integer"/>
 	<field name="precio" class="java.math.BigDecimal"/>
 	<field name="total" class="java.math.BigDecimal"/>
-	<field name="ap_paterno" class="java.lang.String"/>
-	<field name="ap_materno" class="java.lang.String"/>
+	<field name="primer_apellido" class="java.lang.String"/>
+	<field name="segundo_apellido" class="java.lang.String"/>
 	<field name="nombre" class="java.lang.String"/>
-	<field name="nro_carnet" class="java.lang.String"/>
-	<field name="ci_expedido" class="java.lang.String"/>
+	<field name="numero_documento" class="java.lang.String"/>
+	<field name="expedido" class="java.lang.String"/>
 	<field name="tipo" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
@@ -183,7 +183,7 @@
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$F{ap_paterno}+" "+$F{ap_materno}+" "+$F{nombre}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{primer_apellido}+" "+$F{segundo_apellido}+" "+$F{nombre}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="0" y="101" width="100" height="30" uuid="aa5380b9-9237-47fd-b80a-e329f4090e2a"/>
@@ -224,7 +224,7 @@
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$F{nro_carnet}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{numero_documento}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="199" y="131" width="60" height="30" uuid="fdb7600c-b81b-4f73-ab57-5e7ff1c5fb6e">
@@ -237,7 +237,7 @@
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$F{ci_expedido}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{expedido}]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="35" y="61" width="489" height="1" uuid="b0cdfc15-6326-43e9-a6fe-7bad0bff2e63"/>
@@ -321,7 +321,7 @@
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$F{ap_paterno}+" "+$F{ap_materno}+" "+$F{nombre}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{primer_apellido}+" "+$F{segundo_apellido}+" "+$F{nombre}]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="60" y="200" width="180" height="1" uuid="22d4702a-1c89-4977-a09b-f4f5e3354fd4"/>

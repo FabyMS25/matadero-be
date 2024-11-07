@@ -44,7 +44,7 @@ public class Contribuyente {
     private String nombre;
     @Column(name = "primer_apellido", nullable = false, length = 100)
     private String primerApellido;
-    @Column(name = "segundo_apellido", nullable = false, length = 100)
+    @Column(name = "segundo_apellido", nullable = true, length = 100)
     private String segundoApellido;
     @Column(name = "genero", nullable = false, length = 10)
     private String genero;
@@ -52,13 +52,13 @@ public class Contribuyente {
     private String fechaNacimiento;
     @Column(name = "estado_civil", nullable = false,  length = 30)
     private String estadoCivil;
-    @Column(name = "nro_nit", nullable = false, length = 15)
+    @Column(name = "nro_nit", nullable = true, length = 15)
     private String nroNit;
     @Column(name = "celular", nullable = false, length = 15)
     private String celular;
-    @Column(name = "correo", nullable = false, length = 100)
+    @Column(name = "correo", nullable = true, length = 100)
     private String correo;
-    @Column(name = "direccion", nullable = false, length = 100)
+    @Column(name = "direccion", nullable = true, length = 100)
     private String direccion;
     @Column(name = "estado", nullable = false)
     private boolean estado;

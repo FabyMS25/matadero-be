@@ -52,5 +52,9 @@ public class CategoriaController {
             return  Response.unprocessableEntity().setPayload(ex.getMessage());
         }
     }
-
+    @DeleteMapping("/{uuid}")
+    public Response delete(@Parameter(description = "Uuid para eliminar categoria")
+                               @PathVariable("uuid") String uuid) {
+        return Response.ok().setPayload(categoriaService.delete(uuid));
+    }
 }

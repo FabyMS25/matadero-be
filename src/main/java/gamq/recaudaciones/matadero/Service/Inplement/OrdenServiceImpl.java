@@ -104,19 +104,29 @@ public class OrdenServiceImpl implements OrdenService {
                 .orElseThrow(() -> new NotFoundException(CATEGORIA, uuid));
     }
 
-    @Transactional
-    @Override
-    public String delete(String uuid, String motivo) {
+    public String delete(String uuid) {
         Optional<Orden> found = ordenRepository.findByUuid(uuid);
         if (found.isPresent()) {
             Orden orden = found.get();
-            orden.setMotivo(motivo);
-            ordenRepository.save(orden);
             ordenRepository.delete(orden);
 
             return "Eliminación exitosa";
         } else {
             throw new NotFoundException(ORDEN, uuid);
+        }
+    }
+    public String softDelete(String uuid, String motivo) {
+        Optional<Orden> found = ordenRepository.findByUuid(uuid);
+        if (found.isPresent()) {
+            Orden orden = found.get();
+            orden.setMotivo(motivo);
+//            orden.setEstado(true);
+            orden.setEstadoPago("Anulado");
+
+            ordenRepository.save(orden);
+            return "Anulacion exitosa";
+        } else {
+            throw new NotFoundException(SOLICTUD, uuid);
         }
     }
 }

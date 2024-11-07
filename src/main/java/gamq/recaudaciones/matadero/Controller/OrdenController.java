@@ -55,10 +55,15 @@ public class OrdenController {
     }
 
     @DeleteMapping("/{uuid}")
-    public Response delete(
-            @Parameter(description = "Uuid para eliminar Orden") @PathVariable("uuid") String uuid,
-            @RequestParam(value = "motivo", required = false) String motivo) {
-
-        return Response.ok().setPayload(OrdenService.delete(uuid, motivo));
+    public Response delete(@Parameter(description = "Uuid para eliminar Orden")
+                           @PathVariable("uuid") String uuid) {
+        return Response.ok().setPayload(OrdenService.delete(uuid));
+    }
+    @PutMapping("/soft-delete")
+    public Response softDelete(
+            @RequestParam(name = "uuid", required = true) String uuid,
+            @RequestParam(name = "motivo", required = false) String motivo
+    ) {
+        return Response.ok().setPayload(OrdenService.softDelete(uuid, motivo));
     }
 }
