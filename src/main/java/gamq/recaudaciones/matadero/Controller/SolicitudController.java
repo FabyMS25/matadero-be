@@ -53,4 +53,22 @@ public class SolicitudController {
             return  Response.unprocessableEntity().setPayload(ex.getMessage());
         }
     }
+    @DeleteMapping("/{uuid}")
+    public Response delete(@Parameter(description = "Uuid para eliminar Solicitud")
+                               @PathVariable("uuid") String uuid) {
+        return Response.ok().setPayload(SolicitudService.delete(uuid));
+    }
+    @PutMapping("/soft-delete")
+    public Response softDelete(
+            @RequestParam String uuid,
+            @RequestParam String motivo
+    ) {
+        try {
+            return Response.ok().setPayload(SolicitudService.softDelete(uuid, motivo));
+        } catch (Exception ex) {
+            return Response.unprocessableEntity().setPayload(ex.getMessage());
+        }
+    }
+
+
 }

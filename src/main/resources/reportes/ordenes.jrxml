@@ -8,7 +8,7 @@
 	<parameter name="fecha_fin" class="java.sql.Date"/>
 	<parameter name="tipo" class="java.lang.String"/>
 	<queryString language="SQL">
-		<![CDATA[Select ap_paterno,ap_materno, nombre, fecha, 
+		<![CDATA[Select primer_apellido,segundo_apellido, nombre, fecha,
 	   	cantidad, cat.tipo, tasa, cantidad, total, estado_pago, ord.precio
 		From orden ord
 		join contribuyente co on co.id_contribuyente = ord.id_contribuyente
@@ -18,8 +18,8 @@
 	</queryString>
 	<field name="nombre" class="java.lang.String"/>
 	<field name="fecha" class="java.sql.Date"/>
-	<field name="ap_paterno" class="java.lang.String"/>
-	<field name="ap_materno" class="java.lang.String"/>
+	<field name="primer_apellido" class="java.lang.String"/>
+	<field name="segundo_apellido" class="java.lang.String"/>
 	<field name="cantidad" class="java.lang.Integer"/>
 	<field name="tasa" class="java.lang.String"/>
 	<field name="total" class="java.math.BigDecimal"/>
@@ -198,7 +198,7 @@
 			</textField>
 			<textField>
 				<reportElement x="80" y="0" width="170" height="20" uuid="8622f656-ff58-41db-9500-f2e7c67055a3"/>
-				<textFieldExpression><![CDATA[$F{ap_paterno}+" "+$F{ap_materno}+" "+$F{nombre}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{primer_apellido}+" "+$F{segundo_apellido}+" "+$F{nombre}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="251" y="1" width="100" height="19" uuid="a2c697c4-c8f9-4a7a-997e-d6376503b200">

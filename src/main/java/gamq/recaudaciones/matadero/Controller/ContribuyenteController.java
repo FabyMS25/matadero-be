@@ -54,4 +54,9 @@ public class ContribuyenteController {
             return  Response.unprocessableEntity().setPayload(ex.getMessage());
         }
     }
+    @DeleteMapping("/{uuid}")
+    public Response deleteUser(@Parameter(description = "Uuid para eliminar contribuyente")
+                               @PathVariable("uuid") String uuid) {
+        return Response.ok().setPayload(contribuyenteService.delete(uuid));
+    }
 }

@@ -41,6 +41,10 @@ public class OrdenDto {
 
     private CategoriaDto categoriaDto;
 
+    private String observacion;
+
+    private String motivo;
+
     private boolean estado;
 
 }

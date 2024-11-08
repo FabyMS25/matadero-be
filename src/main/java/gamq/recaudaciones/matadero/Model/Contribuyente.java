@@ -28,30 +28,38 @@ public class Contribuyente {
     private Long idContribuyente;
     @Column(name = "uuid", updatable = false, unique = true, nullable = false, length = 50)
     private String uuid;
-    @Column(name = "nombre", nullable = false, length = 100)
-    private String nombre;
-    @Column(name = "ap_paterno", nullable = false, length = 100)
-    private String apPaterno;
-    @Column(name = "ap_materno", nullable = false, length = 100)
-    private String apMaterno;
-    @Column(name = "nro_carnet", nullable = false, length = 15)
-    private String nroCarnet;
-    @Column(name = "nro_nit", nullable = false, length = 10)
-    private String nroNit;
-    @Column(name = "ci_expedido", nullable = false, length = 10)
-    private String ciExpedido;
-    @Column(name = "sexo", nullable = false, length = 10)
-    private String sexo;
-    @Column(name = "direccion", nullable = false, length = 100)
-    private String direccion;
+    @Column(name = "full_name", nullable = false, length = 100)
+    private String fullName;
+    @Column(name = "tipo_contribuyente", nullable = false,  length = 30)
+    private String tipoContribuyente;
     @Column(name = "codigo_contribuyente", nullable = false,  length = 30)
     private String codigoContribuyente;
     @Column(name = "tipo_documento", nullable = false,  length = 30)
     private String tipoDocumento;
+    @Column(name = "numero_documento", nullable = false, length = 15)
+    private String numeroDocumento;
+    @Column(name = "expedido", nullable = false, length = 10)
+    private String expedido;
+    @Column(name = "nombre", nullable = false, length = 100)
+    private String nombre;
+    @Column(name = "primer_apellido", nullable = false, length = 100)
+    private String primerApellido;
+    @Column(name = "segundo_apellido", nullable = true, length = 100)
+    private String segundoApellido;
+    @Column(name = "genero", nullable = false, length = 10)
+    private String genero;
+    @Column(name = "fecha_nacimiento", nullable = false)
+    private String fechaNacimiento;
     @Column(name = "estado_civil", nullable = false,  length = 30)
     private String estadoCivil;
-    @Column(name = "fecha_nac", nullable = false)
-    private String fechaNac;
+    @Column(name = "nro_nit", nullable = true, length = 15)
+    private String nroNit;
+    @Column(name = "celular", nullable = false, length = 15)
+    private String celular;
+    @Column(name = "correo", nullable = true, length = 100)
+    private String correo;
+    @Column(name = "direccion", nullable = true, length = 100)
+    private String direccion;
     @Column(name = "estado", nullable = false)
     private boolean estado;
 

@@ -53,4 +53,17 @@ public class OrdenController {
             return  Response.unprocessableEntity().setPayload(ex.getMessage());
         }
     }
+
+    @DeleteMapping("/{uuid}")
+    public Response delete(@Parameter(description = "Uuid para eliminar Orden")
+                           @PathVariable("uuid") String uuid) {
+        return Response.ok().setPayload(OrdenService.delete(uuid));
+    }
+    @PutMapping("/anular")
+    public Response anularData(
+            @RequestParam(name = "uuid", required = true) String uuid,
+            @RequestParam(name = "motivo", required = false) String motivo
+    ) {
+        return Response.ok().setPayload(OrdenService.anularData(uuid, motivo));
+    }
 }

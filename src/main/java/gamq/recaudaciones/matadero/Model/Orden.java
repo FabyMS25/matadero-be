@@ -52,6 +52,11 @@ public class Orden {
     @JoinColumn(name = "id_categoria", nullable = true)
     private Categoria categoria;
 
+    @Column(name = "observacion", nullable = false, length = 100)
+    private String observacion;
+    @Column(name = "motivo", nullable = true, length = 100)
+    private String motivo;
+
     @PrePersist
     public void initializeUuid() {
         this.setUuid(UUID.randomUUID().toString());

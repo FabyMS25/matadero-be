@@ -12,5 +12,5 @@ public interface ContribuyenteService {
     List<ContribuyenteDto> obtenerContribuyentees();
     ContribuyenteDto crearContribuyente(ContribuyenteDto ContribuyenteDto);
     ContribuyenteDto actualizarContribuyente(ContribuyenteDto ContribuyenteDto);
-
+    String delete(String uuid);
 }

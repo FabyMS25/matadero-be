@@ -7,37 +7,50 @@ public class ContribuyenteMapper {
     public static ContribuyenteDto toDto(Contribuyente contribuyente){
         ContribuyenteDto contribuyenteDto=new ContribuyenteDto();
         contribuyenteDto.setUuid(contribuyente.getUuid());
-        contribuyenteDto.setNombre(contribuyente.getNombre());
-        contribuyenteDto.setApPaterno(contribuyente.getApPaterno());
-        contribuyenteDto.setApMaterno(contribuyente.getApMaterno());
-        contribuyenteDto.setCiExpedido(contribuyente.getCiExpedido());
-        contribuyenteDto.setNroCarnet(contribuyente.getNroCarnet());
-        contribuyenteDto.setNroNit(contribuyente.getNroNit());
-        contribuyenteDto.setSexo(contribuyente.getSexo());
-        contribuyenteDto.setFechaNac(contribuyente.getFechaNac());
-        contribuyenteDto.setEstadoCivil(contribuyente.getEstadoCivil());
+        contribuyenteDto.setTipoContribuyente(contribuyente.getTipoContribuyente());
         contribuyenteDto.setCodigoContribuyente(contribuyente.getCodigoContribuyente());
-        contribuyenteDto.setDireccion(contribuyente.getDireccion());
         contribuyenteDto.setTipoDocumento(contribuyente.getTipoDocumento());
+        contribuyenteDto.setNumeroDocumento(contribuyente.getNumeroDocumento());
+        contribuyenteDto.setExpedido(contribuyente.getExpedido());
+        contribuyenteDto.setNombre(contribuyente.getNombre());
+        contribuyenteDto.setPrimerApellido(contribuyente.getPrimerApellido());
+        contribuyenteDto.setSegundoApellido(contribuyente.getSegundoApellido());
+        contribuyenteDto.setGenero(contribuyente.getGenero());
+        contribuyenteDto.setFechaNacimiento(contribuyente.getFechaNacimiento());
+        contribuyenteDto.setEstadoCivil(contribuyente.getEstadoCivil());
+        contribuyenteDto.setNroNit(contribuyente.getNroNit());
+        contribuyenteDto.setCelular(contribuyente.getCelular());
+        contribuyenteDto.setCorreo(contribuyente.getCorreo());
+        contribuyenteDto.setDireccion(contribuyente.getDireccion());
+        String fullName = contribuyente.getNombre() + " "
+                + contribuyente.getPrimerApellido()
+                + (contribuyente.getSegundoApellido().isEmpty() ? "" : " " + contribuyente.getSegundoApellido());
+        contribuyenteDto.setFullName(fullName.trim());
 
         return contribuyenteDto;
     }
     public static Contribuyente toEntity(ContribuyenteDto contribuyenteDto){
         Contribuyente contribuyente=new Contribuyente();
         contribuyente.setUuid(contribuyenteDto.getUuid());
-        contribuyente.setNombre(contribuyenteDto.getNombre());
-        contribuyente.setApPaterno(contribuyenteDto.getApPaterno());
-        contribuyente.setApMaterno(contribuyenteDto.getApMaterno());
-        contribuyente.setCiExpedido(contribuyenteDto.getCiExpedido());
-        contribuyente.setNroCarnet(contribuyenteDto.getNroCarnet());
-        contribuyente.setNroNit(contribuyenteDto.getNroNit());
-        contribuyente.setSexo(contribuyenteDto.getSexo());
-        contribuyente.setFechaNac(contribuyenteDto.getFechaNac());
-        contribuyente.setEstadoCivil(contribuyenteDto.getEstadoCivil());
+        contribuyente.setTipoContribuyente(contribuyenteDto.getTipoContribuyente());
         contribuyente.setCodigoContribuyente(contribuyenteDto.getCodigoContribuyente());
-        contribuyente.setDireccion(contribuyenteDto.getDireccion());
         contribuyente.setTipoDocumento(contribuyenteDto.getTipoDocumento());
-
+        contribuyente.setNumeroDocumento(contribuyenteDto.getNumeroDocumento());
+        contribuyente.setExpedido(contribuyenteDto.getExpedido());
+        contribuyente.setNombre(contribuyenteDto.getNombre());
+        contribuyente.setPrimerApellido(contribuyenteDto.getPrimerApellido());
+        contribuyente.setSegundoApellido(contribuyenteDto.getSegundoApellido());
+        contribuyente.setGenero(contribuyenteDto.getGenero());
+        contribuyente.setFechaNacimiento(contribuyenteDto.getFechaNacimiento());
+        contribuyente.setEstadoCivil(contribuyenteDto.getEstadoCivil());
+        contribuyente.setNroNit(contribuyenteDto.getNroNit());
+        contribuyente.setCelular(contribuyenteDto.getCelular());
+        contribuyente.setCorreo(contribuyenteDto.getCorreo());
+        contribuyente.setDireccion(contribuyenteDto.getDireccion());
+        String fullName = contribuyenteDto.getNombre() + " "
+                + contribuyenteDto.getPrimerApellido()
+                + (contribuyenteDto.getSegundoApellido().isEmpty() ? "" : " " + contribuyenteDto.getSegundoApellido());
+        contribuyente.setFullName(fullName.trim());
 
         return contribuyente;
     }

@@ -12,4 +12,6 @@ public interface SolicitudService {
     List<SolicitudDto> obtenerSolicitudes();
     SolicitudDto crearSolicitud(SolicitudDto solicitudDto);
     SolicitudDto actualizarSolicitud(SolicitudDto solicitudDto);
+    String delete(String uuid);
+    String softDelete(String uuid, String motivo);
 }

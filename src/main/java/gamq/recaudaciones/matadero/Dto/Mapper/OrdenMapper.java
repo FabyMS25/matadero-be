@@ -17,6 +17,8 @@ public class OrdenMapper {
         ordenDto.setEstado(ordenDto.isEstado());
         ordenDto.setContribuyenteDto(ContribuyenteMapper.toDto(orden.getContribuyente()));
         ordenDto.setCategoriaDto(CategoriaMapper.toDto(orden.getCategoria()));
+        ordenDto.setObservacion(orden.getObservacion());
+        ordenDto.setMotivo(orden.getMotivo());
 
         return ordenDto;
     }
@@ -30,6 +32,8 @@ public class OrdenMapper {
         orden.setTotal(ordenDto.getTotal());
         orden.setEstadoPago(ordenDto.getEstadoPago());
         orden.setEstado(ordenDto.isEstado());
+        orden.setMotivo(ordenDto.getMotivo());
+        orden.setObservacion(ordenDto.getObservacion());
 
         return orden;
     }
