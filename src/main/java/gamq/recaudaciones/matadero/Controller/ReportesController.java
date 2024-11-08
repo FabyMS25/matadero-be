@@ -182,6 +182,43 @@ public class ReportesController {
             System.out.println(e.getLocalizedMessage());
         }
     }
+    @RequestMapping(value="/diario",method= RequestMethod.GET)
+    @ResponseBody
+    public void reporteOrdenesDiarias (
+            @RequestParam(name = "dia",required = false) @DateTimeFormat(pattern="dd/MM/yyyy") Date dia,
+            @RequestParam(name = "user",required = false) String user,
+            @RequestHeader Map<String, String> headers,
+            HttpServletResponse response
+    ) {
+        try {
+            //usuario
+            //String usuario = headers.getOrDefault("usuario", "Default");
+            //ingreso almacen
+            HashMap<String, Object> parametros = new HashMap<String,Object>();
+
+            parametros.put("dia",dia);
+            parametros.put("user",user);
+
+            //parametros.put("logo64","iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk");
+
+            parametros.put(JRParameter.REPORT_LOCALE, Locale.ENGLISH);
+            try {
+                generadorReporte.generarSqlReportePdf(
+                        "diario",
+                        "classpath:reportes/diario.jrxml",
+                        parametros,
+                        response
+                );
+            } catch (SQLException ex) {
+                response.setStatus(500);
+                throw new RuntimeException(ex);
+
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println(e.getLocalizedMessage());
+        }
+    }
 
 
 }
