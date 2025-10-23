@@ -78,7 +78,7 @@ public class OrdenServiceImpl implements OrdenService {
 
             if (OrdenOptional.isPresent()) {
                 Orden ordenModificado = OrdenMapper.toEntity(ordenDto);
-                ordenModificado.setIdSolictud(OrdenOptional.get().getIdSolictud());
+                ordenModificado.setIdOrden(OrdenOptional.get().getIdOrden());
                 Contribuyente contri=getContri(ordenDto.getContribuyenteDto().getUuid());
                 Categoria cate= getCategoria(ordenDto.getCategoriaDto().getUuid());
                 ordenModificado.setContribuyente(contri);

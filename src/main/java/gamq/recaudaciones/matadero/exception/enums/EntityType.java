@@ -5,5 +5,7 @@ public enum EntityType {
     CONTRIBUYENTE,
     SOLICTUD,
     ORDEN,
-    CATEGORIA
+    CATEGORIA,
+    STOCK,
+    CLASFICADOR_RUAT
 }

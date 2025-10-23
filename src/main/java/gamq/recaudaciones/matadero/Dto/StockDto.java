@@ -1,6 +1,5 @@
 package gamq.recaudaciones.matadero.Dto;
 
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;
@@ -9,8 +8,6 @@ import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.Accessors;
 
-import javax.persistence.Column;
-
 @Getter
 @Setter
 @NoArgsConstructor
@@ -18,16 +15,12 @@ import javax.persistence.Column;
 @ToString
 @JsonInclude(value = JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class CategoriaDto {
-    private Long idCategoria;
+public class StockDto {
+    private Long idStock;
     private String uuid;
 
-    private String tipo;
-
-    private Double precio;
-
-    private boolean estado;
-
-    private ClasificadorRuatDto clasificadorRuatDto;
+    private Integer cantidad;
+    private Integer cantidadSaldo;
+    private SolicitudDto solicitudDto;
 
 }

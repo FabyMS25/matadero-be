@@ -11,7 +11,9 @@ import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 @Getter
@@ -28,8 +30,8 @@ public class Solicitud {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_solictud")
-    private Long idSolictud;
+    @Column(name = "id_solicitud")
+    private Long idSolicitud;
     @Column(name = "uuid", updatable = false, unique = true, nullable = false, length = 64)
     private String uuid;
     @Column(name = "fecha", nullable = false)
@@ -52,6 +54,12 @@ public class Solicitud {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_categoria", nullable = true)
     private Categoria categoria;
+
+    @OneToMany(mappedBy = "solicitud", cascade = CascadeType.ALL)
+    private List<Stock> stocklist = new ArrayList<>();
+
+    @OneToMany(mappedBy = "solicitud", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Orden> ordenList = new ArrayList<>();
 
     @Column(name = "motivo", nullable = true, length = 100)
     private String motivo;

@@ -37,6 +37,10 @@ public class Categoria {
     @Column(name = "estado", nullable = false)
     private boolean estado;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_clasificador_ruat", nullable = false)
+    private ClasificadorRuat clasificadorRuat;
+
     @PrePersist
     public void initializeUuid() {
         this.setUuid(UUID.randomUUID().toString());

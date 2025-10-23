@@ -24,8 +24,9 @@ import java.util.UUID;
 public class Orden {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_solictud")
-    private Long idSolictud;
+    @Column(name = "id_Orden")
+    private Long idOrden;
+
     @Column(name = "uuid", updatable = false, unique = true, nullable = false, length = 64)
     private String uuid;
     @Column(name = "fecha", nullable = false)
@@ -45,12 +46,16 @@ public class Orden {
 
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_contribuyente", nullable = true)
+    @JoinColumn(name = "id_contribuyente", nullable = false)
     private Contribuyente contribuyente;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_categoria", nullable = true)
+    @JoinColumn(name = "id_categoria", nullable = false)
     private Categoria categoria;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_solicitud", nullable = false)
+    private Solicitud solicitud;
 
     @Column(name = "observacion", nullable = false, length = 100)
     private String observacion;

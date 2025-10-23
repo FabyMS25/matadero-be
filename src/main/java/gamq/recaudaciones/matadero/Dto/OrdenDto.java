@@ -2,6 +2,7 @@ package gamq.recaudaciones.matadero.Dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import gamq.recaudaciones.matadero.Dto.Mapper.SolicitudMapper;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -20,7 +21,7 @@ import java.util.Date;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class OrdenDto {
 
-
+    private Long idOrden;
     private String uuid;
 
     private Date fecha;
@@ -40,6 +41,8 @@ public class OrdenDto {
     private ContribuyenteDto contribuyenteDto;
 
     private CategoriaDto categoriaDto;
+
+    private SolicitudDto solicitudDto;
 
     private String observacion;
 

@@ -2,18 +2,14 @@ package gamq.recaudaciones.matadero.Dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import gamq.recaudaciones.matadero.Model.Orden;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.Accessors;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.OneToMany;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Getter
@@ -23,30 +19,19 @@ import java.util.List;
 @ToString
 @JsonInclude(value = JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class SolicitudDto {
 
-    private Long idSolicitud;
-
+public class ClasificadorRuatDto {
+    private Long idClasificadorRuat;
     private String uuid;
-
-    private Date fecha;
-
-    private Double cantidad;
-
-    private Double precio;
-
-    private Double total;
-
-    private ContribuyenteDto contribuyenteDto;
-
-    private CategoriaDto categoriaDto;
-
-    private String estadoSolicitud;
-
-    private List<OrdenDto> ordenDtoList = new ArrayList<>();
-
-    private String motivo;
-
     private boolean estado;
+    private LocalDateTime fechaCreacion;
 
+    private String codigo;
+    private String nombre;
+    private String descripcion;
+//    private String tipoReserva; // por_hora, por_persona, por_evento, por_club , mensualidad
+    private String tipoArancel = "DI"; // DI = Discrecional
+    private Boolean activo = true;
+
+    private List<CategoriaDto> CategoriaDtoList = new ArrayList<>();
 }

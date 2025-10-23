@@ -76,7 +76,7 @@ public class SolictudServiceImpl implements SolicitudService {
 
             if (SolicitudOptional.isPresent()) {
                 Solicitud solModificado = SolicitudMapper.toEntity(solicitudDto);
-                solModificado.setIdSolictud(SolicitudOptional.get().getIdSolictud());
+                solModificado.setIdSolicitud(SolicitudOptional.get().getIdSolicitud());
                 Contribuyente contri=getContri(solicitudDto.getContribuyenteDto().getUuid());
                 Categoria cate= getCategoria(solicitudDto.getCategoriaDto().getUuid());
                 solModificado.setContribuyente(contri);
