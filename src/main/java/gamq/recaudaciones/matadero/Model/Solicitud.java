@@ -1,6 +1,7 @@
 package gamq.recaudaciones.matadero.Model;
 
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import gamq.recaudaciones.matadero.Dto.ContribuyenteDto;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -58,7 +59,8 @@ public class Solicitud {
     @OneToMany(mappedBy = "solicitud", cascade = CascadeType.ALL)
     private List<Stock> stocklist = new ArrayList<>();
 
-    @OneToMany(mappedBy = "solicitud", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "solicitud", cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.EAGER)
+    @JsonManagedReference
     private List<Orden> ordenList = new ArrayList<>();
 
     @Column(name = "motivo", nullable = true, length = 100)

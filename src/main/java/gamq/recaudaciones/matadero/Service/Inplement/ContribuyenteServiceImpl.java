@@ -72,7 +72,7 @@ public class ContribuyenteServiceImpl implements ContribuyenteService {
                 throw new NotFoundException(CONTRIBUYENTE, ContribuyenteDto.getUuid());
             }
         } else {
-            throw new NullReferenceException(SOLICTUD);
+            throw new NullReferenceException(SOLICITUD);
         }
     }
 

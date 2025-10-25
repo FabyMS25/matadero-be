@@ -12,11 +12,9 @@ import gamq.recaudaciones.matadero.Service.SolicitudService;
 import gamq.recaudaciones.matadero.exception.NoResultException;
 import gamq.recaudaciones.matadero.exception.NotFoundException;
 import gamq.recaudaciones.matadero.exception.NullReferenceException;
-import gamq.recaudaciones.matadero.exception.enums.EntityType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -24,7 +22,7 @@ import java.util.stream.Collectors;
 import static gamq.recaudaciones.matadero.exception.enums.EntityType.*;
 
 @Component
-public class SolictudServiceImpl implements SolicitudService {
+public class SolicitudServiceImpl implements SolicitudService {
 
     @Autowired
     SolicitudRepository solicitudRepository;
@@ -38,19 +36,28 @@ public class SolictudServiceImpl implements SolicitudService {
         if (SolicitudOptional.isPresent()) {
             return SolicitudMapper.toDto(SolicitudOptional.get());
         } else {
-            throw new NotFoundException(SOLICTUD, uuid);
+            throw new NotFoundException(SOLICITUD, uuid);
+        }
+
+    }
+    public SolicitudDto findById(Long id){
+        Optional<Solicitud> SolicitudOptional = solicitudRepository.findByIdWithOrdenes(id);
+        if (SolicitudOptional.isPresent()) {
+            return SolicitudMapper.toDto(SolicitudOptional.get());
+        } else {
+            throw new NotFoundException(SOLICITUD, id.toString());
         }
 
     }
     public List<SolicitudDto> obtenerSolicitudes(){
-        List<Solicitud> solicituds = solicitudRepository.findAll();
+        List<Solicitud> solicituds = solicitudRepository.findAllWithOrdenes();
 
         if (!solicituds.isEmpty()) {
             return solicituds.stream().map(sol-> {
                 return SolicitudMapper.toDto(sol);
             }).collect(Collectors.toList());
         } else {
-            throw new NoResultException(SOLICTUD);
+            throw new NoResultException(SOLICITUD);
         }
     }
     public SolicitudDto crearSolicitud(SolicitudDto solicitudDto){
@@ -64,7 +71,7 @@ public class SolictudServiceImpl implements SolicitudService {
 
             return SolicitudMapper.toDto(solicitudRepository.save(newSolicitud));
         } else {
-            throw new NullReferenceException(SOLICTUD);
+            throw new NullReferenceException(SOLICITUD);
         }
 
 
@@ -84,10 +91,10 @@ public class SolictudServiceImpl implements SolicitudService {
 
                 return SolicitudMapper.toDto(solicitudRepository.save(solModificado));
             } else {
-                throw new NotFoundException(SOLICTUD, solicitudDto.getUuid());
+                throw new NotFoundException(SOLICITUD, solicitudDto.getUuid());
             }
         } else {
-            throw new NullReferenceException(SOLICTUD);
+            throw new NullReferenceException(SOLICITUD);
         }
     }
     private Contribuyente getContri(String uuid) {
@@ -106,7 +113,7 @@ public class SolictudServiceImpl implements SolicitudService {
             solicitudRepository.delete(solicitud);
             return "Eliminación exitosa";
         } else {
-            throw new NotFoundException(SOLICTUD, uuid);
+            throw new NotFoundException(SOLICITUD, uuid);
         }
     }
 
@@ -120,7 +127,7 @@ public class SolictudServiceImpl implements SolicitudService {
             solicitudRepository.save(solicitud);
             return "Eliminación exitosa";
         } else {
-            throw new NotFoundException(SOLICTUD, uuid);
+            throw new NotFoundException(SOLICITUD, uuid);
         }
     }
 

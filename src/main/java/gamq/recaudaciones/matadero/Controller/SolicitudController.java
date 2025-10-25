@@ -26,6 +26,16 @@ public class SolicitudController {
             return Response.notFound().setPayload(ex.getMessage());
         }
     }
+    @GetMapping("/por/{id}")
+    public Response buscarSolicitudPorUuid(@Parameter(description = "Uuid para busqueda de actividad economica")
+                                           @PathVariable("id") Long id) {
+        try{
+            SolicitudDto contri = SolicitudService.findById(id);
+            return Response.ok().setPayload(contri);
+        } catch(Exception ex) {
+            return Response.notFound().setPayload(ex.getMessage());
+        }
+    }
     @GetMapping()
     public Response obtenerSolicituds() {
         try{

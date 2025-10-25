@@ -2,11 +2,13 @@ package gamq.recaudaciones.matadero.Dto.Mapper;
 
 import gamq.recaudaciones.matadero.Dto.OrdenDto;
 import gamq.recaudaciones.matadero.Model.Orden;
+import org.springframework.stereotype.Component;
 
+@Component
 public class OrdenMapper {
 
-    public static OrdenDto toDto(Orden orden){
-        OrdenDto ordenDto=new OrdenDto();
+    public static OrdenDto toDto(Orden orden) {
+        OrdenDto ordenDto = new OrdenDto();
         ordenDto.setIdOrden(orden.getIdOrden());
         ordenDto.setUuid(orden.getUuid());
         ordenDto.setFecha(orden.getFecha());
@@ -15,17 +17,16 @@ public class OrdenMapper {
         ordenDto.setTasa(orden.getTasa());
         ordenDto.setTotal(orden.getTotal());
         ordenDto.setEstadoPago(orden.getEstadoPago());
-        ordenDto.setEstado(ordenDto.isEstado());
+        ordenDto.setEstado(orden.isEstado());
         ordenDto.setContribuyenteDto(ContribuyenteMapper.toDto(orden.getContribuyente()));
         ordenDto.setCategoriaDto(CategoriaMapper.toDto(orden.getCategoria()));
-        ordenDto.setSolicitudDto(SolicitudMapper.toDto(orden.getSolicitud()));
         ordenDto.setObservacion(orden.getObservacion());
         ordenDto.setMotivo(orden.getMotivo());
-
         return ordenDto;
     }
-    public static Orden toEntity(OrdenDto ordenDto){
-        Orden orden= new Orden();
+
+    public static Orden toEntity(OrdenDto ordenDto) {
+        Orden orden = new Orden();
         orden.setIdOrden(ordenDto.getIdOrden());
         orden.setUuid(ordenDto.getUuid());
         orden.setFecha(ordenDto.getFecha());
@@ -37,12 +38,8 @@ public class OrdenMapper {
         orden.setEstado(ordenDto.isEstado());
         orden.setMotivo(ordenDto.getMotivo());
         orden.setObservacion(ordenDto.getObservacion());
-
         orden.setCategoria(CategoriaMapper.toEntity(ordenDto.getCategoriaDto()));
         orden.setContribuyente(ContribuyenteMapper.toEntity(ordenDto.getContribuyenteDto()));
-        orden.setSolicitud(SolicitudMapper.toEntity(ordenDto.getSolicitudDto()));
-
         return orden;
     }
-
 }

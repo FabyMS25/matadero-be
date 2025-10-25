@@ -32,14 +32,14 @@ public class SolicitudMapper {
         solicitudDto.setContribuyenteDto(ContribuyenteMapper.toDto(solicitud.getContribuyente()));
         solicitudDto.setCategoriaDto(CategoriaMapper.toDto(solicitud.getCategoria()));
         solicitudDto.setMotivo(solicitud.getMotivo());
-        /*if (solicitud.getOrdenList() != null && !solicitud.getOrdenList().isEmpty()) {
+        if (solicitud.getOrdenList() != null && !solicitud.getOrdenList().isEmpty()) {
             solicitudDto.setOrdenDtoList(
                     solicitud.getOrdenList()
                             .stream()
                             .map(OrdenMapper::toDto)
                             .collect(Collectors.toList())
             );
-        }*/
+        }
 
 
         return solicitudDto
@@ -63,7 +63,7 @@ public class SolicitudMapper {
 
         solicitud.setContribuyente(ContribuyenteMapper.toEntity(solicitudDto.getContribuyenteDto()));
 
-        /*if (solicitudDto.getOrdenDtoList() != null && !solicitudDto.getOrdenDtoList().isEmpty()) {
+        if (solicitudDto.getOrdenDtoList() != null && !solicitudDto.getOrdenDtoList().isEmpty()) {
             List<Orden> ordenes = new ArrayList<>();
             for (OrdenDto ordenDto : solicitudDto.getOrdenDtoList()) {
                 Orden orden = OrdenMapper.toEntity(ordenDto);
@@ -72,7 +72,7 @@ public class SolicitudMapper {
                 ordenes.add(orden);
             }
             solicitud.setOrdenList(ordenes);
-        }*/
+        }
 
         return solicitud;
     }

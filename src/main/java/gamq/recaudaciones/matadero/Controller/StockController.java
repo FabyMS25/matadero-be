@@ -1,6 +1,7 @@
 package gamq.recaudaciones.matadero.Controller;
 
 import gamq.recaudaciones.matadero.Dto.StockDto;
+import gamq.recaudaciones.matadero.Dto.response.Response;
 import gamq.recaudaciones.matadero.Service.StockService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -16,27 +17,27 @@ public class StockController {
     private StockService stockService;
 
     @PostMapping
-    public ResponseEntity<StockDto> crearStock(@RequestBody StockDto dto) {
+    public Response crearStock(@RequestBody StockDto dto) {
         StockDto creado = stockService.crearStock(dto);
-        return ResponseEntity.ok(creado);
+        return Response.ok().setPayload(creado);
     }
 
     @GetMapping
-    public ResponseEntity<List<StockDto>> listarStocks() {
+    public Response listarStocks() {
         List<StockDto> lista = stockService.listarStocks();
-        return ResponseEntity.ok(lista);
+        return Response.ok().setPayload(lista);
     }
 
    @GetMapping("/{id}")
-    public ResponseEntity<StockDto> obtenerStock(@PathVariable Long id) {
+    public Response obtenerStock(@PathVariable Long id) {
         StockDto dto = stockService.obtenerPorId(id);
-        return ResponseEntity.ok(dto);
+        return Response.ok().setPayload(dto);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> eliminarStock(@PathVariable Long id) {
+    public Response eliminarStock(@PathVariable Long id) {
         stockService.eliminarStock(id);
-        return ResponseEntity.noContent().build();
+        return Response.notContent();
     }
     /*@GetMapping("/saldo/{id}")
     public ResponseEntity<StockDto> obtenerStockPorSolictud(@PathVariable Long id) {
@@ -44,12 +45,12 @@ public class StockController {
         return ResponseEntity.ok(dto);
     }*/
     @GetMapping("/saldo/{codigo}")
-    public ResponseEntity<StockDto> obtenerStockPorSolictud(@PathVariable("codigo") Long codigo) {
+    public Response obtenerStockPorSolictud(@PathVariable("codigo") Long codigo) {
         if (codigo == null) {
             throw new IllegalArgumentException("El ID debe ser numérico");
         }
         StockDto dto = stockService.obtenerPorIdSolictud(codigo);
-        return ResponseEntity.ok(dto);
+        return Response.ok().setPayload(dto);
     }
 
 }

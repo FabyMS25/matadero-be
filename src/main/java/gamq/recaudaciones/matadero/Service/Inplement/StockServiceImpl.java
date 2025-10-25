@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import static gamq.recaudaciones.matadero.exception.enums.EntityType.SOLICTUD;
+import static gamq.recaudaciones.matadero.exception.enums.EntityType.SOLICITUD;
 import static gamq.recaudaciones.matadero.exception.enums.EntityType.STOCK;
 
 @Service

@@ -1,5 +1,6 @@
 package gamq.recaudaciones.matadero.Model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -55,6 +56,7 @@ public class Orden {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_solicitud", nullable = false)
+    @JsonBackReference
     private Solicitud solicitud;
 
     @Column(name = "observacion", nullable = false, length = 100)

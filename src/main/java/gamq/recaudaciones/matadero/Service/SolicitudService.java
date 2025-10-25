@@ -9,6 +9,7 @@ import java.util.List;
 public interface SolicitudService {
 
     SolicitudDto findByUuid(String uuid);
+    SolicitudDto findById(Long id);
     List<SolicitudDto> obtenerSolicitudes();
     SolicitudDto crearSolicitud(SolicitudDto solicitudDto);
     SolicitudDto actualizarSolicitud(SolicitudDto solicitudDto);

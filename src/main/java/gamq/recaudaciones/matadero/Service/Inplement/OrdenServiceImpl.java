@@ -89,7 +89,7 @@ public class OrdenServiceImpl implements OrdenService {
                 throw new NotFoundException(ORDEN, ordenDto.getUuid());
             }
         } else {
-            throw new NullReferenceException(SOLICTUD);
+            throw new NullReferenceException(SOLICITUD);
         }
 
 
@@ -126,7 +126,7 @@ public class OrdenServiceImpl implements OrdenService {
             ordenRepository.save(orden);
             return "Anulacion exitosa";
         } else {
-            throw new NotFoundException(SOLICTUD, uuid);
+            throw new NotFoundException(SOLICITUD, uuid);
         }
     }
 }
