@@ -15,6 +15,7 @@ import gamq.recaudaciones.matadero.exception.NullReferenceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -51,6 +52,17 @@ public class SolicitudServiceImpl implements SolicitudService {
     }
     public List<SolicitudDto> obtenerSolicitudes(){
         List<Solicitud> solicituds = solicitudRepository.findAllWithOrdenes();
+
+        if (!solicituds.isEmpty()) {
+            return solicituds.stream().map(sol-> {
+                return SolicitudMapper.toDto(sol);
+            }).collect(Collectors.toList());
+        } else {
+            throw new NoResultException(SOLICITUD);
+        }
+    }
+    public List<SolicitudDto> obtenerSolicitudesByFechas(Date fechaIni, Date fechaFin){
+        List<Solicitud> solicituds = solicitudRepository.findByFechas(fechaIni,fechaFin);
 
         if (!solicituds.isEmpty()) {
             return solicituds.stream().map(sol-> {

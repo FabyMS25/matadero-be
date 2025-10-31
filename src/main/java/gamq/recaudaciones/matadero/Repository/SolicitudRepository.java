@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 @Repository
@@ -21,4 +22,7 @@ public interface SolicitudRepository extends JpaRepository<Solicitud, Long> {
 
     @Query("SELECT DISTINCT s FROM Solicitud s LEFT JOIN FETCH s.ordenList")
     List<Solicitud> findAllWithOrdenes();
+
+    @Query("SELECT sa FROM Solicitud sa WHERE sa.fecha BETWEEN ?1 AND ?2 ")
+    List<Solicitud> findByFechas(Date fechaIni, Date fechaFin);
 }

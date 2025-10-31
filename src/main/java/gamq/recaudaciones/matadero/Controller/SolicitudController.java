@@ -5,9 +5,12 @@ import gamq.recaudaciones.matadero.Dto.response.Response;
 import gamq.recaudaciones.matadero.Service.SolicitudService;
 import io.swagger.v3.oas.annotations.Parameter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/solicitud")
@@ -27,7 +30,7 @@ public class SolicitudController {
         }
     }
     @GetMapping("/por/{id}")
-    public Response buscarSolicitudPorUuid(@Parameter(description = "Uuid para busqueda de actividad economica")
+    public Response buscarSolicitudPorId(@Parameter(description = "Uuid para busqueda de actividad economica")
                                            @PathVariable("id") Long id) {
         try{
             SolicitudDto contri = SolicitudService.findById(id);
@@ -44,6 +47,21 @@ public class SolicitudController {
         } catch(Exception ex) {
             return Response.notContent().setPayload(ex.getMessage());
         }
+    }
+    @GetMapping("/fechas")
+    public Response buscarSolictudesPorFechaSalida(
+            @Parameter(name = "fechaIni",description = "Fecha Salida inicio")
+            @RequestParam @DateTimeFormat(pattern="dd/MM/yyyy") Date fechaIni,
+            @Parameter(name = "fechaFin",description = "Fecha Salida fin")
+            @RequestParam @DateTimeFormat(pattern="dd/MM/yyyy") Date fechaFin)
+            {
+                try{
+                    List<SolicitudDto> contris =  SolicitudService.obtenerSolicitudesByFechas(fechaIni,fechaFin);
+                    return Response.ok().setPayload(contris);
+                } catch(Exception ex) {
+                    return Response.notContent().setPayload(ex.getMessage());
+                }
+
     }
     @PostMapping()
     public Response crearSolicitud(@Parameter(description = "Objeto json para crear una Construccion")

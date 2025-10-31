@@ -57,6 +57,20 @@
 				</textElement>
 				<text><![CDATA[SOLICITUD DE TRABAJO]]></text>
 			</staticText>
+			<staticText>
+				<reportElement x="408" y="63" width="67" height="15" uuid="318a06e9-2364-48ff-b2cb-ca551c8a6151"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Quillacollo, ]]></text>
+			</staticText>
+			<textField pattern="EEEE MMMM d, yyyy">
+				<reportElement x="450" y="63" width="120" height="15" uuid="e389c54e-f69e-47d0-891f-d3452247d7b5"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
 		</band>
 	</title>
 	<pageHeader>

@@ -33,7 +33,7 @@
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="79" splitType="Stretch">
+		<band height="80" splitType="Stretch">
 			<staticText>
 				<reportElement x="170" y="12" width="389" height="28" uuid="43e720ff-230a-4cbe-b1a5-d2acff06cde8"/>
 				<textElement textAlignment="Center">
@@ -62,13 +62,27 @@
 				</reportElement>
 				<imageExpression><![CDATA[net.sf.jasperreports.engine.util.JRImageLoader.getInstance(new SimpleJasperReportsContext()).loadAwtImageFromBytes(Base64.getDecoder().decode($P{logo64}))]]></imageExpression>
 			</image>
+			<staticText>
+				<reportElement x="408" y="63" width="67" height="15" uuid="4a2a82bb-890f-4da6-b8f8-ec5a4b5dba8d"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Quillacollo, ]]></text>
+			</staticText>
+			<textField pattern="EEEE MMMM d, yyyy">
+				<reportElement x="450" y="63" width="120" height="15" uuid="51bed82b-02e6-47dd-89ff-97225f9b2f02"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
 		</band>
 	</title>
 	<pageHeader>
 		<band splitType="Stretch"/>
 	</pageHeader>
 	<columnHeader>
-		<band height="30" splitType="Stretch">
+		<band height="26" splitType="Stretch">
 			<staticText>
 				<reportElement x="10" y="0" width="70" height="26" uuid="6bdec7e1-3c03-4795-afcd-9f6fa6929da3">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="95b31b94-3106-434b-811b-6d3245a7e242"/>
@@ -79,7 +93,7 @@
 					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
-				<textElement textAlignment="Center">
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="11" isBold="true"/>
 				</textElement>
 				<text><![CDATA[FECHA]]></text>
@@ -92,7 +106,7 @@
 					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
-				<textElement textAlignment="Center">
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="11" isBold="true"/>
 				</textElement>
 				<text><![CDATA[CONTRIBUYENTE]]></text>
@@ -107,7 +121,7 @@
 					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
-				<textElement textAlignment="Center">
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="11" isBold="true"/>
 				</textElement>
 				<text><![CDATA[TIPO]]></text>
@@ -122,7 +136,7 @@
 					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
-				<textElement textAlignment="Center">
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="9" isBold="true"/>
 				</textElement>
 				<text><![CDATA[CANTIDAD]]></text>
@@ -137,7 +151,7 @@
 					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
-				<textElement textAlignment="Center">
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[PRECIO]]></text>
@@ -152,7 +166,7 @@
 					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
-				<textElement textAlignment="Center">
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[TOTAL]]></text>
@@ -167,7 +181,7 @@
 					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
-				<textElement textAlignment="Center">
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[ESTADO PAGO]]></text>
@@ -180,15 +194,15 @@
 					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
-				<textElement textAlignment="Center">
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="11" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Nro.]]></text>
+				<text><![CDATA[N°]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="33" splitType="Stretch">
+		<band height="22" splitType="Stretch">
 			<textField pattern="dd/MM/yy">
 				<reportElement x="10" y="0" width="70" height="20" uuid="d88c3c65-ad6b-4f1b-a072-61c3072a9c52">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="95b31b94-3106-434b-811b-6d3245a7e242"/>
@@ -215,7 +229,7 @@
 				<textFieldExpression><![CDATA[$F{cantidad}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="349" y="0" width="51" height="20" uuid="e6ba918c-35c6-4504-83eb-e35dd1a402dd">
+				<reportElement x="351" y="0" width="49" height="20" uuid="e6ba918c-35c6-4504-83eb-e35dd1a402dd">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="bda52fca-f68f-465f-81ed-8436d2d1c04b"/>
 				</reportElement>
 				<textElement textAlignment="Center"/>
@@ -235,18 +249,17 @@
 				<textFieldExpression><![CDATA[$F{estado_pago}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="-12" y="2" width="22" height="16" uuid="90bed23c-7b9d-483e-901c-1a104749cd15"/>
+				<reportElement x="-12" y="0" width="22" height="18" uuid="90bed23c-7b9d-483e-901c-1a104749cd15"/>
 				<textElement textAlignment="Center"/>
 				<textFieldExpression><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
 			</textField>
+			<line>
+				<reportElement x="-10" y="18" width="580" height="1" uuid="cb914d1d-eddb-4d47-9921-e6cf277ec6aa"/>
+			</line>
 		</band>
 	</detail>
 	<columnFooter>
-		<band height="4" splitType="Stretch">
-			<line>
-				<reportElement x="-15" y="-11" width="585" height="1" uuid="22b00a2e-03f9-4578-bf8c-b4c55eb00692"/>
-			</line>
-		</band>
+		<band height="4" splitType="Stretch"/>
 	</columnFooter>
 	<pageFooter>
 		<band height="2" splitType="Stretch"/>
