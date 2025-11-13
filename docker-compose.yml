@@ -16,14 +16,14 @@ services:
     restart: always
   db-matadero:
     image: postgis/postgis:14-3.2-alpine
-#    image: postgres:14-alpine
+    #    image: postgres:14-alpine
     container_name: 'matadero-db'
     environment:
       - POSTGRES_USER=matadero
       - POSTGRES_PASSWORD=matadero123
       - POSTGRES_DB=db_matadero
     ports:
-      - '5438:5432'
+      - '5439:5432'
     volumes:
       - db:/var/lib/postgresql/data
     restart: always
