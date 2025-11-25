@@ -1,12 +1,15 @@
 package gamq.recaudaciones.matadero.Service.Inplement;
 
+import gamq.recaudaciones.matadero.Dto.Mapper.SolicitudMapper;
 import gamq.recaudaciones.matadero.Dto.Mapper.StockMapper;
 import gamq.recaudaciones.matadero.Dto.StockDto;
+import gamq.recaudaciones.matadero.Model.Solicitud;
 import gamq.recaudaciones.matadero.Model.Stock;
 import gamq.recaudaciones.matadero.Repository.SolicitudRepository;
 import gamq.recaudaciones.matadero.Repository.StockRepository;
 import gamq.recaudaciones.matadero.Service.StockService;
 import gamq.recaudaciones.matadero.exception.NotFoundException;
+import gamq.recaudaciones.matadero.exception.NullReferenceException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -72,5 +75,20 @@ public class StockServiceImpl implements StockService {
         Stock stock = stockRepository.stockPorSolicitud(idSolicitud)
                 .orElseThrow(() -> new RuntimeException("No existe Stock para la Solicitud ID: " + idSolicitud));
         return stockMapper.toDto(stock);
+    }
+    public StockDto actualizarStock(StockDto stockDto) {
+        if (stockDto != null) {
+            Optional<Stock> stockOptional = stockRepository.findById(stockDto.getIdStock());
+            if (stockOptional.isPresent()) {
+                Stock stockModificado = stockMapper.toEntity(stockDto);
+                return stockMapper.toDto(stockRepository.save(stockModificado));
+            } else {
+                throw new NotFoundException(STOCK, stockDto.getUuid());
+            }
+        }
+        else {
+            throw new NullReferenceException(STOCK);
+        }
+
     }
 }

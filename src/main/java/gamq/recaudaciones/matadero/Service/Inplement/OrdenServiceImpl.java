@@ -11,6 +11,7 @@ import gamq.recaudaciones.matadero.Model.Orden;
 import gamq.recaudaciones.matadero.Repository.CategoriaRepository;
 import gamq.recaudaciones.matadero.Repository.ContribuyenteRepository;
 import gamq.recaudaciones.matadero.Repository.OrdenRepository;
+import gamq.recaudaciones.matadero.Repository.SolicitudRepository;
 import gamq.recaudaciones.matadero.Service.OrdenService;
 import gamq.recaudaciones.matadero.exception.NoResultException;
 import gamq.recaudaciones.matadero.exception.NotFoundException;
@@ -34,6 +35,8 @@ public class OrdenServiceImpl implements OrdenService {
     ContribuyenteRepository contribuyenteRepository;
    @Autowired
     CategoriaRepository categoriaRepository;
+    @Autowired
+    SolicitudRepository solicitudRepository;
     
    public  OrdenDto findByUuid(String uuid){
         Optional<Orden> OrdenOptional = ordenRepository.findByUuid(uuid);
@@ -60,8 +63,10 @@ public class OrdenServiceImpl implements OrdenService {
             Orden newOrden = OrdenMapper.toEntity(ordenDto);
             Contribuyente contri=getContri(ordenDto.getContribuyenteDto().getUuid());
             Categoria cate= getCategoria(ordenDto.getCategoriaDto().getUuid());
+            Solicitud sol= getSolicitud(ordenDto.getSolicitudDto().getUuid());
             newOrden.setContribuyente(contri);
             newOrden.setCategoria(cate);
+            newOrden.setSolicitud(sol);
 
             return OrdenMapper.toDto(ordenRepository.save(newOrden));
         } else {
@@ -103,6 +108,11 @@ public class OrdenServiceImpl implements OrdenService {
         return categoriaRepository.findByUuid(uuid)
                 .orElseThrow(() -> new NotFoundException(CATEGORIA, uuid));
     }
+    private Solicitud getSolicitud(String uuid) {
+        return solicitudRepository.findByUuid(uuid)
+                .orElseThrow(() -> new NotFoundException(SOLICITUD, uuid));
+    }
+
 
     public String delete(String uuid) {
         Optional<Orden> found = ordenRepository.findByUuid(uuid);

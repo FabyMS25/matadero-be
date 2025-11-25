@@ -56,12 +56,12 @@ public class SolicitudMapper {
         solicitud.setEstado(solicitudDto.isEstado());
         solicitud.setEstadoSolicitud(solicitudDto.getEstadoSolicitud());
         solicitud.setMotivo(solicitudDto.getMotivo());
-        Categoria categoria = categoriaRepository.findById(solicitudDto.getCategoriaDto().getIdCategoria())
+       /* Categoria categoria = categoriaRepository.findById(solicitudDto.getCategoriaDto().getIdCategoria())
                 .orElseThrow(() -> new RuntimeException("Categoría no encontrada en BD con ID: " + solicitudDto.getCategoriaDto().getIdCategoria()));
 
         solicitud.setCategoria(categoria);
 
-        solicitud.setContribuyente(ContribuyenteMapper.toEntity(solicitudDto.getContribuyenteDto()));
+        solicitud.setContribuyente(ContribuyenteMapper.toEntity(solicitudDto.getContribuyenteDto()));*/
 
         if (solicitudDto.getOrdenDtoList() != null && !solicitudDto.getOrdenDtoList().isEmpty()) {
             List<Orden> ordenes = new ArrayList<>();

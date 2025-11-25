@@ -60,13 +60,27 @@
 				</reportElement>
 				<imageExpression><![CDATA[net.sf.jasperreports.engine.util.JRImageLoader.getInstance(new SimpleJasperReportsContext()).loadAwtImageFromBytes(Base64.getDecoder().decode($P{logo64}))]]></imageExpression>
 			</image>
+			<staticText>
+				<reportElement x="408" y="63" width="67" height="15" uuid="cd36c74b-6f53-42e6-8a4c-b58fd3d51763"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Quillacollo, ]]></text>
+			</staticText>
+			<textField pattern="EEEE MMMM d, yyyy">
+				<reportElement x="450" y="63" width="120" height="15" uuid="f4a13f23-5480-402a-89aa-dfdde87faf14"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
 		</band>
 	</title>
 	<pageHeader>
 		<band splitType="Stretch"/>
 	</pageHeader>
 	<columnHeader>
-		<band height="30" splitType="Stretch">
+		<band height="26" splitType="Stretch">
 			<staticText>
 				<reportElement x="20" y="0" width="90" height="26" uuid="6bdec7e1-3c03-4795-afcd-9f6fa6929da3">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="95b31b94-3106-434b-811b-6d3245a7e242"/>
@@ -171,7 +185,7 @@
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="24" splitType="Stretch">
+		<band height="25" splitType="Stretch">
 			<textField pattern="M/d/yy">
 				<reportElement x="30" y="2" width="70" height="20" uuid="d88c3c65-ad6b-4f1b-a072-61c3072a9c52">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="95b31b94-3106-434b-811b-6d3245a7e242"/>
@@ -212,18 +226,17 @@
 				<textFieldExpression><![CDATA[$F{total}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="-12" y="2" width="32" height="16" uuid="90bed23c-7b9d-483e-901c-1a104749cd15"/>
+				<reportElement x="-12" y="2" width="32" height="18" uuid="90bed23c-7b9d-483e-901c-1a104749cd15"/>
 				<textElement textAlignment="Center"/>
 				<textFieldExpression><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
 			</textField>
+			<line>
+				<reportElement x="-10" y="21" width="585" height="1" uuid="dff25685-331b-4874-9a92-f9b3861d6ad7"/>
+			</line>
 		</band>
 	</detail>
 	<columnFooter>
-		<band height="3" splitType="Stretch">
-			<line>
-				<reportElement x="-15" y="0" width="585" height="1" uuid="22b00a2e-03f9-4578-bf8c-b4c55eb00692"/>
-			</line>
-		</band>
+		<band height="9" splitType="Stretch"/>
 	</columnFooter>
 	<pageFooter>
 		<band splitType="Stretch"/>

@@ -1,8 +1,10 @@
 package gamq.recaudaciones.matadero.Controller;
 
+import gamq.recaudaciones.matadero.Dto.SolicitudDto;
 import gamq.recaudaciones.matadero.Dto.StockDto;
 import gamq.recaudaciones.matadero.Dto.response.Response;
 import gamq.recaudaciones.matadero.Service.StockService;
+import io.swagger.v3.oas.annotations.Parameter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -39,11 +41,15 @@ public class StockController {
         stockService.eliminarStock(id);
         return Response.notContent();
     }
-    /*@GetMapping("/saldo/{id}")
-    public ResponseEntity<StockDto> obtenerStockPorSolictud(@PathVariable Long id) {
-        StockDto dto = stockService.obtenerPorIdSolictud(id);
-        return ResponseEntity.ok(dto);
-    }*/
+    @PutMapping()
+    public Response actualizarStock(@Parameter(description = "Objeto json para actualizar Stock")
+                                        @RequestBody StockDto stockDto) {
+        try{
+            return Response.ok().setPayload(stockService.actualizarStock(stockDto));
+        } catch (Exception ex) {
+            return  Response.unprocessableEntity().setPayload(ex.getMessage());
+        }
+    }
     @GetMapping("/saldo/{codigo}")
     public Response obtenerStockPorSolictud(@PathVariable("codigo") Long codigo) {
         if (codigo == null) {

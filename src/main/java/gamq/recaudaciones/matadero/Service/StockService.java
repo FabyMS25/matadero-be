@@ -12,4 +12,5 @@ public interface StockService {
     StockDto obtenerPorId(Long id);
     void eliminarStock(Long id);
     StockDto obtenerPorIdSolictud(Long id);
+    StockDto actualizarStock(StockDto stockDto);
 }
