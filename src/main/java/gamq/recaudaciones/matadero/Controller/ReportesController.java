@@ -109,6 +109,50 @@ public class ReportesController {
             System.out.println(e.getLocalizedMessage());
         }
     }
+    @RequestMapping(value="/stock",method= RequestMethod.GET)
+    @ResponseBody
+    public void reporteStock (
+            @RequestParam(name = "fecha_ini",required = false) @DateTimeFormat(pattern="dd/MM/yyyy") Date fecha_ini,
+            @RequestParam(name = "fecha_fin",required = false) @DateTimeFormat(pattern="dd/MM/yyyy") Date fecha_fin,
+            @RequestParam(name = "tipo",required = false) String tipo,
+            @RequestHeader Map<String, String> headers,
+            HttpServletResponse response
+    ) {
+        try {
+            //usuario
+            //String usuario = headers.getOrDefault("usuario", "Default");
+            //ingreso almacen
+            HashMap<String, Object> parametros = new HashMap<String,Object>();
+            parametros.put("fecha_ini",fecha_ini);
+            parametros.put("fecha_fin",fecha_fin);
+            if(tipo.equals("TODOS")) {
+                String cad = "%%";
+                parametros.put("tipo", cad);
+            }
+            else {
+                parametros.put("tipo",tipo);
+            }
+
+            //parametros.put("logo64","iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk");
+
+            parametros.put(JRParameter.REPORT_LOCALE, Locale.ENGLISH);
+            try {
+                generadorReporte.generarSqlReportePdf(
+                        "Stock",
+                        "classpath:reportes/inventario.jrxml",
+                        parametros,
+                        response
+                );
+            } catch (SQLException ex) {
+                response.setStatus(500);
+                throw new RuntimeException(ex);
+
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println(e.getLocalizedMessage());
+        }
+    }
     @RequestMapping(value="/orden",method= RequestMethod.GET)
     @ResponseBody
     public void reporteorden (
