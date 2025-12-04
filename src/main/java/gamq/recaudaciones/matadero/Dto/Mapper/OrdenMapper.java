@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class OrdenMapper {
 
-    public static OrdenDto toDto(Orden orden) {
+    public static OrdenDto toDto(Orden orden, boolean complete) {
         OrdenDto ordenDto = new OrdenDto();
         ordenDto.setIdOrden(orden.getIdOrden());
         ordenDto.setUuid(orden.getUuid());
@@ -22,6 +22,9 @@ public class OrdenMapper {
         ordenDto.setCategoriaDto(CategoriaMapper.toDto(orden.getCategoria()));
         ordenDto.setObservacion(orden.getObservacion());
         ordenDto.setMotivo(orden.getMotivo());
+        if(complete){
+            ordenDto.setSolicitudDto(SolicitudMapper.toDto(orden.getSolicitud()));
+        }
         return ordenDto;
     }
 
