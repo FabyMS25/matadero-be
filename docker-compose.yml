@@ -1,7 +1,22 @@
 version: '3.8'
 services:
+  be-matadero:
+    depends_on:
+      - db-matadero
+    image: 'matadero-be'
+    container_name: 'matadero-be'
+    build: .
+    ports:
+      - '8086:8086'
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db-matadero:5432/db_matadero
+      - SPRING_DATASOURCE_USERNAME=matadero
+      - SPRING_DATASOURCE_PASSWORD=matadero123
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+    restart: always
   db-matadero:
     image: postgis/postgis:14-3.2-alpine
+    #    image: postgres:14-alpine
     container_name: 'matadero-db'
     environment:
       - POSTGRES_USER=matadero
@@ -12,32 +27,6 @@ services:
     volumes:
       - db:/var/lib/postgresql/data
     restart: always
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U matadero"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-
-  be-matadero:
-    depends_on:
-      db-matadero:
-        condition: service_healthy
-    build:
-      context: .
-      dockerfile: Dockerfile.be
-    container_name: 'matadero-be'
-    ports:
-      - '8086:8086'
-    environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://db-matadero:5432/db_matadero
-      - SPRING_DATASOURCE_USERNAME=matadero
-      - SPRING_DATASOURCE_PASSWORD=matadero123
-      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
-      - SPRING_PROFILES_ACTIVE=prod
-    restart: always
-    volumes:
-      - ./logs:/app/logs
-
   pg-matadero:
     image: dpage/pgadmin4
     container_name: 'matadero-pg'
@@ -51,18 +40,14 @@ services:
     volumes:
       - pg:/var/lib/pgadmin
     restart: always
-
   fe-matadero:
-    build:
-      context: ../matadero-fe
-      dockerfile: Dockerfile
+    image: 'matadero-fe'
     container_name: 'matadero-fe'
     ports:
       - '4206:80'
     depends_on:
       - be-matadero
     restart: always
-
 volumes:
   db:
   pg:
