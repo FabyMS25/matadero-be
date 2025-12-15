@@ -36,14 +36,11 @@ public class SolicitudMapper {
             solicitudDto.setOrdenDtoList(
                     solicitud.getOrdenList()
                             .stream()
-                            .map(OrdenMapper::toDto)
+                            .map(orden -> OrdenMapper.toDto(orden, false))
                             .collect(Collectors.toList())
             );
         }
-
-
-        return solicitudDto
-;
+        return solicitudDto;
     }
     public static Solicitud  toEntity(SolicitudDto  solicitudDto){
         Solicitud solicitud= new Solicitud();

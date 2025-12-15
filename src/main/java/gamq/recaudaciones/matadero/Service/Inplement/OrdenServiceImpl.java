@@ -41,7 +41,7 @@ public class OrdenServiceImpl implements OrdenService {
    public  OrdenDto findByUuid(String uuid){
         Optional<Orden> OrdenOptional = ordenRepository.findByUuid(uuid);
         if (OrdenOptional.isPresent()) {
-            return OrdenMapper.toDto(OrdenOptional.get());
+            return OrdenMapper.toDto(OrdenOptional.get(),false);
         } else {
             throw new NotFoundException(ORDEN, uuid);
         }
@@ -51,7 +51,7 @@ public class OrdenServiceImpl implements OrdenService {
 
         if (!Ordens.isEmpty()) {
             return Ordens.stream().map(sol-> {
-                return OrdenMapper.toDto(sol);
+                return OrdenMapper.toDto(sol,true);
             }).collect(Collectors.toList());
         } else {
             throw new NoResultException(ORDEN);
@@ -68,7 +68,7 @@ public class OrdenServiceImpl implements OrdenService {
             newOrden.setCategoria(cate);
             newOrden.setSolicitud(sol);
 
-            return OrdenMapper.toDto(ordenRepository.save(newOrden));
+            return OrdenMapper.toDto(ordenRepository.save(newOrden),true);
         } else {
             throw new NullReferenceException(ORDEN);
         }
@@ -88,8 +88,8 @@ public class OrdenServiceImpl implements OrdenService {
                 Categoria cate= getCategoria(ordenDto.getCategoriaDto().getUuid());
                 ordenModificado.setContribuyente(contri);
                 ordenModificado.setCategoria(cate);
-
-                return OrdenMapper.toDto(ordenRepository.save(ordenModificado));
+                ordenModificado.setSolicitud(getSolicitud(ordenDto.getSolicitudDto().getUuid()));
+                return OrdenMapper.toDto(ordenRepository.save(ordenModificado),false);
             } else {
                 throw new NotFoundException(ORDEN, ordenDto.getUuid());
             }
