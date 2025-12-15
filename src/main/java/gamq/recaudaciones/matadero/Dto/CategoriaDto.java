@@ -27,7 +27,9 @@ public class CategoriaDto {
     private Double precio;
 
     private boolean estado;
+    // 🔹 SOLO REFERENCIA (opcional)
+    private String clasificadorUuid;
 
-    private ClasificadorRuatDto clasificadorRuatDto;
+    //private ClasificadorRuatDto clasificadorRuatDto;
 
 }

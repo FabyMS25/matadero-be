@@ -1,6 +1,7 @@
 package gamq.recaudaciones.matadero.Model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -38,8 +39,10 @@ public class Categoria {
     private boolean estado;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_clasificador_ruat", nullable = false)
+    @JoinColumn(name = "id_clasificador_ruat")
+    @JsonIgnore
     private ClasificadorRuat clasificadorRuat;
+
 
     @PrePersist
     public void initializeUuid() {

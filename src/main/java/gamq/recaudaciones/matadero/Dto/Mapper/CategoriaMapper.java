@@ -12,7 +12,13 @@ public class CategoriaMapper {
         categoriaDto.setTipo(categoria.getTipo());
         categoriaDto.setPrecio(categoria.getPrecio());
         categoriaDto.setEstado(categoria.isEstado());
-        categoriaDto.setClasificadorRuatDto(ClasificadorRuatMapper.toDto(categoria.getClasificadorRuat()));
+        if (categoria.getClasificadorRuat() != null) {
+            categoriaDto.setClasificadorUuid(
+                    categoria.getClasificadorRuat().getUuid()
+            );
+        }
+
+        //categoriaDto.setClasificadorRuatDto(ClasificadorRuatMapper.toDto(categoria.getClasificadorRuat()));
 
         return categoriaDto;
     }
@@ -25,7 +31,8 @@ public class CategoriaMapper {
         categoria.setTipo(categoriaDto.getTipo());
         categoria.setPrecio(categoriaDto.getPrecio());
         categoria.setEstado(categoriaDto.isEstado());
-        categoria.setClasificadorRuat(ClasificadorRuatMapper.toEntity(categoriaDto.getClasificadorRuatDto()));
+
+        //categoria.setClasificadorRuat(ClasificadorRuatMapper.toEntity(categoriaDto.getClasificadorRuatDto()));
         return categoria;
     }
 }
