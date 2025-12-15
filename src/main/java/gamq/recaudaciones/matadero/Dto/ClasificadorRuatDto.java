@@ -33,5 +33,5 @@ public class ClasificadorRuatDto {
     private String tipoArancel = "DI"; // DI = Discrecional
     private Boolean activo = true;
 
-    private List<CategoriaDto> CategoriaDtoList = new ArrayList<>();
+    private List<CategoriaDto> categorias = new ArrayList<>();
 }

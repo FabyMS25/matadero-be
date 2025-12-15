@@ -10,6 +10,7 @@ import gamq.recaudaciones.matadero.Model.Categoria;
 import gamq.recaudaciones.matadero.Model.Categoria;
 import gamq.recaudaciones.matadero.Model.Categoria;
 import gamq.recaudaciones.matadero.Repository.CategoriaRepository;
+import gamq.recaudaciones.matadero.Repository.ClasificadorRuatRepository;
 import gamq.recaudaciones.matadero.Service.CategoriaService;
 import gamq.recaudaciones.matadero.exception.NoResultException;
 import gamq.recaudaciones.matadero.exception.NotFoundException;
@@ -29,6 +30,8 @@ public class CategoriaServiceImpl implements CategoriaService {
 
     @Autowired
     CategoriaRepository categoriaRepository;
+    @Autowired
+    ClasificadorRuatRepository clasificadorRuatRepository;
    public CategoriaDto findByUuid(String uuid){
        Optional<Categoria> CategoriaOptional = categoriaRepository.findByUuid(uuid);
        if (CategoriaOptional.isPresent()) {
@@ -42,41 +45,84 @@ public class CategoriaServiceImpl implements CategoriaService {
        List<Categoria> Categorias = categoriaRepository.findAll();
 
        if (!Categorias.isEmpty()) {
-           return Categorias.stream().map(cont-> {
-               return CategoriaMapper.toDto(cont);
+           return Categorias.stream().map(cat-> {
+               CategoriaDto catdto=CategoriaMapper.toDto(cat);
+               catdto.setClasificadorUuid(cat.getClasificadorRuat().getUuid());
+               return  catdto;
            }).collect(Collectors.toList());
        } else {
            throw new NoResultException(CATEGORIA);
        }
    }
-   public  CategoriaDto crearCategoria(CategoriaDto CategoriaDto){
-        if (CategoriaDto != null) {
+    @Override
+    @Transactional
+    public CategoriaDto crearCategoria(CategoriaDto dto) {
 
-            Categoria newCategoria = CategoriaMapper.toEntity(CategoriaDto);
-
-            return CategoriaMapper.toDto(categoriaRepository.save(newCategoria));
-        } else {
+        if (dto == null) {
             throw new NullReferenceException(CATEGORIA);
         }
+
+        // 1️⃣ Buscar clasificador
+        ClasificadorRuat clasificador = clasificadorRuatRepository
+                .findByUuid(dto.getClasificadorUuid())
+                .orElseThrow(() ->
+                        new NotFoundException(
+                                CLASFICADOR_RUAT,
+                                dto.getClasificadorUuid()
+                        )
+                );
+
+        // 2️⃣ Mapear categoría
+        Categoria categoria = CategoriaMapper.toEntity(dto);
+
+        // 3️⃣ Asociar correctamente
+        clasificador.addCategoria(categoria);
+
+        // 4️⃣ Guardar
+        Categoria guardada = categoriaRepository.save(categoria);
+
+        return CategoriaMapper.toDto(guardada);
     }
-   public CategoriaDto actualizarCategoria(CategoriaDto CategoriaDto){
 
-       if (CategoriaDto != null) {
+    @Override
+    @Transactional
+    public CategoriaDto actualizarCategoria(CategoriaDto dto) {
 
-           Optional<Categoria> CategoriaOptional = categoriaRepository.findByUuid(CategoriaDto.getUuid());
+        if (dto == null) {
+            throw new NullReferenceException(CATEGORIA);
+        }
 
-           if (CategoriaOptional.isPresent()) {
-               Categoria CategoriaModificado = CategoriaMapper.toEntity(CategoriaDto);
-               CategoriaModificado.setIdCategoria(CategoriaOptional.get().getIdCategoria());
+        Categoria categoria = categoriaRepository
+                .findByUuid(dto.getUuid())
+                .orElseThrow(() ->
+                        new NotFoundException(CATEGORIA, dto.getUuid())
+                );
 
-               return CategoriaMapper.toDto(categoriaRepository.save(CategoriaModificado));
-           } else {
-               throw new NotFoundException(CATEGORIA, CategoriaDto.getUuid());
-           }
-       } else {
-           throw new NullReferenceException(CATEGORIA);
-       }
-   }
+        // 1️⃣ Actualizar SOLO campos simples
+        categoria.setTipo(dto.getTipo());
+        categoria.setPrecio(dto.getPrecio());
+        categoria.setEstado(dto.isEstado());
+
+        // 2️⃣ Cambiar clasificador SOLO si viene en el DTO
+        if (dto.getClasificadorUuid() != null) {
+            ClasificadorRuat nuevoClasificador =
+                    clasificadorRuatRepository
+                            .findByUuid(dto.getClasificadorUuid())
+                            .orElseThrow(() ->
+                                    new NotFoundException(
+                                            CLASFICADOR_RUAT,
+                                            dto.getClasificadorUuid()
+                                    )
+                            );
+
+            categoria.setClasificadorRuat(nuevoClasificador);
+        }
+
+        // 3️⃣ Guardar
+        return CategoriaMapper.toDto(
+                categoriaRepository.save(categoria)
+        );
+    }
 
     @Transactional
     @Override

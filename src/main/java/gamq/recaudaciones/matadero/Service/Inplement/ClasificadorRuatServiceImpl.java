@@ -1,7 +1,9 @@
 package gamq.recaudaciones.matadero.Service.Inplement;
 
 import gamq.recaudaciones.matadero.Dto.ClasificadorRuatDto;
+import gamq.recaudaciones.matadero.Dto.Mapper.CategoriaMapper;
 import gamq.recaudaciones.matadero.Dto.Mapper.ClasificadorRuatMapper;
+import gamq.recaudaciones.matadero.Model.Categoria;
 import gamq.recaudaciones.matadero.exception.NoResultException;
 import gamq.recaudaciones.matadero.exception.NotFoundException;
 import gamq.recaudaciones.matadero.exception.NullReferenceException;
@@ -92,14 +94,30 @@ public class ClasificadorRuatServiceImpl implements ClasificadorRuatService {
             throw new NullReferenceException(CLASFICADOR_RUAT);
         }
 
-        // Check if codigo already exists
         if (clasificadorRuatRepository.findByCodigo(clasificadorDto.getCodigo()).isPresent()) {
-            throw new RuntimeException("Ya existe un clasificador con el código: " + clasificadorDto.getCodigo());
+            throw new RuntimeException(
+                    "Ya existe un clasificador con el código: " + clasificadorDto.getCodigo()
+            );
         }
 
+        // 1️⃣ Mapper SIN categorías
         ClasificadorRuat clasificador = ClasificadorRuatMapper.toEntity(clasificadorDto);
-        ClasificadorRuat clasificadorGuardado = clasificadorRuatRepository.save(clasificador);
+
+        // 2️⃣ Asociar categorías correctamente
+        if (clasificadorDto.getCategorias() != null) {
+            clasificadorDto.getCategorias().forEach(catDto -> {
+                Categoria categoria = CategoriaMapper.toEntity(catDto);
+                clasificador.addCategoria(categoria); // 🔑 sincroniza ambos lados
+            });
+        }
+
+        // 3️⃣ Guardar
+        ClasificadorRuat clasificadorGuardado =
+                clasificadorRuatRepository.save(clasificador);
+
+        // 4️⃣ Retornar DTO
         return ClasificadorRuatMapper.toDto(clasificadorGuardado);
+
     }
 
     @Override
@@ -127,7 +145,7 @@ public class ClasificadorRuatServiceImpl implements ClasificadorRuatService {
                     .orElseThrow(() -> new NotFoundException(CLASFICADOR_RUAT, uuid));
 
             // Check if clasificador is used in any tarifa
-            if (!clasificador.getCategoriaList().isEmpty()) {
+            if (!clasificador.getCategorias().isEmpty()) {
                 throw new RuntimeException("No se puede eliminar el clasificador porque está siendo utilizado en tarifas existentes.");
             }
 
@@ -147,7 +165,7 @@ public class ClasificadorRuatServiceImpl implements ClasificadorRuatService {
                 .orElseThrow(() -> new NotFoundException(CLASFICADOR_RUAT, uuid));
 
         // Check if clasificador is used in any tarifa
-        if (!clasificador.getCategoriaList().isEmpty()) {
+        if (!clasificador.getCategorias().isEmpty()) {
             throw new RuntimeException("No se puede eliminar permanentemente el clasificador porque está siendo utilizado en tarifas existentes.");
         }
 

@@ -1,7 +1,11 @@
 package gamq.recaudaciones.matadero.Dto.Mapper;
 
 import gamq.recaudaciones.matadero.Dto.ClasificadorRuatDto;
+import gamq.recaudaciones.matadero.Dto.CategoriaDto;
 import gamq.recaudaciones.matadero.Model.ClasificadorRuat;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class ClasificadorRuatMapper {
 
@@ -18,7 +22,15 @@ public class ClasificadorRuatMapper {
         dto.setActivo(clasificador.getActivo());
         dto.setFechaCreacion(clasificador.getFechaCreacion());
         dto.setEstado(clasificador.isEstado());
+        // ✅ MAPEO DE CATEGORÍAS
+        if (clasificador.getCategorias() != null) {
+            List<CategoriaDto> categoriasDto = clasificador.getCategorias()
+                    .stream()
+                    .map(CategoriaMapper::toDto)
+                    .collect(Collectors.toList());
 
+            dto.setCategorias(categoriasDto);
+        }
         return dto;
     }
 
@@ -45,9 +57,10 @@ public class ClasificadorRuatMapper {
         clasificador.setCodigo(dto.getCodigo());
         clasificador.setNombre(dto.getNombre());
         clasificador.setDescripcion(dto.getDescripcion());
-//        clasificador.setTipoReserva(dto.getTipoReserva());
+        //clasificador.set
         clasificador.setTipoArancel(dto.getTipoArancel());
         clasificador.setActivo(dto.getActivo());
+
 
         return clasificador;
     }

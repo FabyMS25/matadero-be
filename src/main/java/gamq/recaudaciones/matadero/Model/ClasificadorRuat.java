@@ -50,7 +50,7 @@ public class ClasificadorRuat {
     private Boolean activo = true;
 
     @OneToMany(mappedBy = "clasificadorRuat", cascade = CascadeType.ALL)
-    private List<Categoria> CategoriaList = new ArrayList<>();
+    private List<Categoria> categorias = new ArrayList<>();
 
     @PrePersist
     public void prePersist() {
@@ -61,4 +61,21 @@ public class ClasificadorRuat {
             this.fechaCreacion = LocalDateTime.now();
         }
     }
+
+    // *** Método auxiliar para manejar la bidireccionalidad ***
+    /*public void addCategoria(Categoria categoria) {
+        categoriaList.add(categoria);
+        categoria.setClasificadorRuat(this);
+    }*/
+    // 🔁 Métodos de sincronización
+    public void addCategoria(Categoria categoria) {
+        categorias.add(categoria);
+        categoria.setClasificadorRuat(this);
+    }
+
+    public void removeCategoria(Categoria categoria) {
+        categorias.remove(categoria);
+        categoria.setClasificadorRuat(null);
+    }
 }
+
