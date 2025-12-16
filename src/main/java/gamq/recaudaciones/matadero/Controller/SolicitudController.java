@@ -81,6 +81,12 @@ public class SolicitudController {
             return  Response.unprocessableEntity().setPayload(ex.getMessage());
         }
     }
+    @PutMapping("/{uuid}/estado")
+    public Response cambiar_Estado(@Parameter(description = "Uuid para cambiar estado  Solicitud")
+                                       @PathVariable("uuid") String uuid) {
+        return Response.ok().setPayload(SolicitudService.Cambiar_estado(uuid));
+
+    }
     @DeleteMapping("/{uuid}")
     public Response delete(@Parameter(description = "Uuid para eliminar Solicitud")
                                @PathVariable("uuid") String uuid) {

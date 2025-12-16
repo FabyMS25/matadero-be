@@ -1,9 +1,12 @@
 package gamq.recaudaciones.matadero.Service.Inplement;
 
+import gamq.recaudaciones.matadero.Dto.Mapper.OrdenMapper;
 import gamq.recaudaciones.matadero.Dto.Mapper.SolicitudMapper;
+import gamq.recaudaciones.matadero.Dto.OrdenDto;
 import gamq.recaudaciones.matadero.Dto.SolicitudDto;
 import gamq.recaudaciones.matadero.Model.Categoria;
 import gamq.recaudaciones.matadero.Model.Contribuyente;
+import gamq.recaudaciones.matadero.Model.Orden;
 import gamq.recaudaciones.matadero.Model.Solicitud;
 import gamq.recaudaciones.matadero.Repository.CategoriaRepository;
 import gamq.recaudaciones.matadero.Repository.ContribuyenteRepository;
@@ -15,6 +18,7 @@ import gamq.recaudaciones.matadero.exception.NullReferenceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -100,6 +104,16 @@ public class SolicitudServiceImpl implements SolicitudService {
                 Categoria cate= getCategoria(solicitudDto.getCategoriaDto().getUuid());
                 solModificado.setContribuyente(contri);
                 solModificado.setCategoria(cate);
+                /*if (solicitudDto.getOrdenDtoList() != null && !solicitudDto.getOrdenDtoList().isEmpty()) {
+                    List<Orden> ordenes = new ArrayList<>();
+                    for (OrdenDto ordenDto : solicitudDto.getOrdenDtoList()) {
+                        Orden orden = OrdenMapper.toEntity(ordenDto);
+                        // muy importante: establecer relación bidireccional
+                        orden.setSolicitud(orden.getSolicitud());
+                        ordenes.add(orden);
+                    }
+                    solModificado.setOrdenList(ordenes);
+                }*/
 
                 return SolicitudMapper.toDto(solicitudRepository.save(solModificado));
             } else {
@@ -117,7 +131,20 @@ public class SolicitudServiceImpl implements SolicitudService {
         return categoriaRepository.findByUuid(uuid)
                 .orElseThrow(() -> new NotFoundException(CATEGORIA, uuid));
     }
+    public SolicitudDto Cambiar_estado(String uuid){
+         Optional<Solicitud> soli= solicitudRepository.findByUuid(uuid);
+         if (soli.isPresent())
+         {
+            Solicitud solicitud= soli.get();
+            solicitud.setEstadoSolicitud("Con Orden");
+            return SolicitudMapper.toDto(solicitud);
+         }
+         else{
+             throw new NotFoundException(SOLICITUD, uuid);
+         }
 
+
+    }
     public String delete(String uuid) {
         Optional<Solicitud> found = solicitudRepository.findByUuid(uuid);
         if (found.isPresent()) {

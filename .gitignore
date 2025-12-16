@@ -1,11 +1,12 @@
 HELP.md
-#.gradle
-#build/
+.gradle
+build/
 !build/libs
 
 
 
 ### STS ###
+*.class
 .apt_generated
 .classpath
 .factorypath

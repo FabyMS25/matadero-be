@@ -15,6 +15,7 @@ public interface SolicitudService {
     List<SolicitudDto> obtenerSolicitudesByFechas(Date fechaIni, Date fechaFin);
     SolicitudDto crearSolicitud(SolicitudDto solicitudDto);
     SolicitudDto actualizarSolicitud(SolicitudDto solicitudDto);
+    SolicitudDto Cambiar_estado(String uuid);
     String delete(String uuid);
     String softDelete(String uuid, String motivo);
 }
