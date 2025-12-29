@@ -2,6 +2,8 @@ package gamq.recaudaciones.matadero.Controller;
 
 
 import gamq.recaudaciones.matadero.utils.GeneradorReporte;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import net.sf.jasperreports.engine.JRParameter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -17,10 +19,11 @@ import java.util.Map;
 
 @Controller
 @RequestMapping("/api/reporte")
+@Tag(name = "Reportes", description = "Genera los reportes imprimibles del Faeneo")
 public class ReportesController {
     @Autowired
     private GeneradorReporte generadorReporte;
-
+    @Operation(summary = "Lsita las Ordenes en un rango de fechas ")
     @RequestMapping(value="/ordenes",method= RequestMethod.GET)
     @ResponseBody
     public void reporteListaReserva (
@@ -65,6 +68,7 @@ public class ReportesController {
             System.out.println(e.getLocalizedMessage());
         }
     }
+    @Operation(summary = "Lista las Solicitudes en un rango de fechas")
     @RequestMapping(value="/solicitudes",method= RequestMethod.GET)
     @ResponseBody
     public void reporteListaSolictudes (
@@ -109,6 +113,7 @@ public class ReportesController {
             System.out.println(e.getLocalizedMessage());
         }
     }
+    @Operation(summary = "Lista todo el Stock con sus Ordenes respectivas ")
     @RequestMapping(value="/stock",method= RequestMethod.GET)
     @ResponseBody
     public void reporteStock (
@@ -153,6 +158,7 @@ public class ReportesController {
             System.out.println(e.getLocalizedMessage());
         }
     }
+    @Operation(summary = "Busca una orden por uuid")
     @RequestMapping(value="/orden",method= RequestMethod.GET)
     @ResponseBody
     public void reporteorden (
@@ -189,6 +195,7 @@ public class ReportesController {
             System.out.println(e.getLocalizedMessage());
         }
     }
+    @Operation(summary = "Buscar una Solicitud por uuid")
     @RequestMapping(value="/solicitud",method= RequestMethod.GET)
     @ResponseBody
     public void reporteSolictud (
@@ -226,6 +233,7 @@ public class ReportesController {
             System.out.println(e.getLocalizedMessage());
         }
     }
+    @Operation(summary = "Ingresos Diarios")
     @RequestMapping(value="/diario",method= RequestMethod.GET)
     @ResponseBody
     public void reporteOrdenesDiarias (
